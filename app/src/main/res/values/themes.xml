@@ -7,7 +7,10 @@
 
     <style name="Theme.Copture" parent="Base.Theme.Copture" >
 
-        <item name="mainBackgroundColor"></item>
+        <item name="mainBackgroundColor">@color/platinum</item>
+        <item name="altBackgroundColor">@color/white</item>
+        <item name="contrastBackgroundColor">@color/eerieBlack</item>
+        <item name="contrastBackgroundColor">@color/eerieBlack</item>
 
     </style>
 </resources>
