@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="customStyles">
+
+        <!-- Project Universals -->
+        <attr name="mainBackgroundColor" format="color" />
+        <attr name="altBackgroundColor" format="color" />
+        <attr name="contrastBackgroundColor" format="color" />
+        <attr name="mainTextColor" format="color" />
+        <attr name="contrastTextColor" format="color" />
+        <attr name="mainIconColor" format="color" />
+        <attr name="contrastIconColor" format="color" />
+        <attr name="backgroundColor" format="color" />
+
+        <!-- Cards -->
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="cardCornerRadius" format="string" />
+        <attr name="cardElevation" format="string" />
+
+        <!-- Input Fields -->
+        <attr name="inputFieldBackground" format="color" />
+        <attr name="inputFieldIconColor" format="color" />
+        <attr name="inputFieldHintColor" format="color" />
+        <attr name="inputFieldInputColor" format="color" />
+
+    </declare-styleable>
+
+</resources>

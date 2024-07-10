@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--  Dark Colors  -->
+    <color name="darkColor_900">#000000</color>
+    <color name="darkColor_800">#E6000000</color>
+    <color name="darkColor_700">#CC000000</color>
+    <color name="darkColor_600">#B3000000</color>
+    <color name="darkColor_500">#99000000</color>
+    <color name="darkColor_400">#80000000</color>
+    <color name="darkColor_300">#66000000</color>
+    <color name="darkColor_200">#4D000000</color>
+    <color name="darkColor_100">#33000000</color>
+
+    <!-- Dull Colors -->
+    <color name="dullColor_900">#E5E5E5</color>
+    <color name="dullColor_800">#E6E5E5E5</color>
+    <color name="dullColor_700">#CCE5E5E5</color>
+    <color name="dullColor_600">#B3E5E5E5</color>
+    <color name="dullColor_500">#99E5E5E5</color>
+    <color name="dullColor_400">#80E5E5E5</color>
+    <color name="dullColor_300">#66E5E5E5</color>
+    <color name="dullColor_200">#4DE5E5E5</color>
+    <color name="dullColor_100">#33E5E5E5</color>
+
+    <!-- Bright Colors -->
+    <color name="brightColor_900">#FFFFFF</color>
+    <color name="brightColor_800">#E6FFFFFF</color>
+    <color name="brightColor_700">#CCFFFFFF</color>
+    <color name="brightColor_600">#B3FFFFFF</color>
+    <color name="brightColor_500">#99FFFFFF</color>
+    <color name="brightColor_400">#80FFFFFF</color>
+    <color name="brightColor_300">#66FFFFFF</color>
+    <color name="brightColor_200">#4DFFFFFF</color>
+    <color name="brightColor_100">#33FFFFFF</color>
+
+    <!--    Primary Colors-->
+    <color name="primaryColor_900">#D34741</color>
+    <color name="primaryColor_800">#E6D34741</color>
+    <color name="primaryColor_700">#CCD34741</color>
+    <color name="primaryColor_600">#B3D34741</color>
+    <color name="primaryColor_500">#99D34741</color>
+    <color name="primaryColor_400">#80D34741</color>
+    <color name="primaryColor_300">#66D34741</color>
+    <color name="primaryColor_200">#4DD34741</color>
+    <color name="primaryColor_100">#33D34741</color>
+    <!-- Primary Variant -->
+    <color name="primaryColorVariant">#FBBE82</color>
+
+    <!-- Secondary Colors -->
+    <color name="secondaryColor_900">#14213D</color>
+    <color name="secondaryColor_800">#E614213D</color>
+    <color name="secondaryColor_700">#CC14213D</color>
+    <color name="secondaryColor_600">#B314213D</color>
+    <color name="secondaryColor_500">#9914213D</color>
+    <color name="secondaryColor_400">#8014213D</color>
+    <color name="secondaryColor_300">#6614213D</color>
+    <color name="secondaryColor_200">#4D14213D</color>
+    <color name="secondaryColor_100">#3314213D</color>
+
+    <!-- Error Colors -->
+    <color name="brightErrorColor">#B00020</color>
+    <color name="errorColor_600">#E6941B0C</color>
+    <color name="errorColor_500">#99941B0C</color>
+    <color name="errorColor_400">#4D941B0C</color>
+
+    <!--    Alternative colors-->
+    <color name="transparent">@android:color/transparent</color>
+    <color name="yellow">#FCA311</color>
+    <color name="nightBlack">#000F08</color>
+    <color name="smokyBlack">#0F1108</color>
+    <color name="eerieBlack_900">#111D13</color>
+    <color name="dullBlack">#25242C</color>
+    <color name="raisinBlack">#2E2E3A</color>
+</resources>
