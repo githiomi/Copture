@@ -25,6 +25,11 @@
         <attr name="customInputFieldInputColor" format="color" />
         <attr name="customInputFieldErrorColor" format="color"/>
 
+        <!-- Fonts -->
+        <attr name="regularFont" format="reference" />
+        <attr name="semiBoldFont" format="reference" />
+        <attr name="boldFont" format="reference" />
+
     </declare-styleable>
 
 </resources>

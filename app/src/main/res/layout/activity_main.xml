@@ -11,40 +11,56 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/CV_Bottom_Navigation" >
+        android:layout_above="@id/CV_Bottom_Navigation">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/home_profile_picture"
-                    android:src="@drawable/traffic_3"
-                    android:background="?attr/altBackgroundColor"
+                    android:id="@+id/IV_profilePicture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    />
+                    android:background="?attr/altBackgroundColor"
+                    android:contentDescription="@string/home_profile_picture"
+                    android:src="@drawable/traffic_3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/IV_profilePicture"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/TV_welcomeBack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/welcome_back" />
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="?attr/semiBoldFont"
+                        android:text="@string/welcome_back"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/TV_OfficerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="?attr/boldFont"
+                        android:text="@string/officer_name_placeholder"
+                        android:textAllCaps="true"
+                        android:textColor="?attr/mainTextColor"
+                        android:textSize="22sp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </RelativeLayout>
