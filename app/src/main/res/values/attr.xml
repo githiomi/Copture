@@ -8,10 +8,10 @@
         <attr name="altBackgroundColor" format="color" />
         <attr name="contrastBackgroundColor" format="color" />
         <attr name="mainTextColor" format="color" />
+        <attr name="altTextColor" format="color" />
         <attr name="contrastTextColor" format="color" />
         <attr name="mainIconColor" format="color" />
-        <attr name="contrastIconColor" format="color" />
-        <attr name="backgroundColor" format="color" />
+        <attr name="altIconColor" format="color" />
 
         <!-- Cards -->
         <attr name="cardBackgroundColor" format="color" />
@@ -23,6 +23,7 @@
         <attr name="inputFieldIconColor" format="color" />
         <attr name="inputFieldHintColor" format="color" />
         <attr name="inputFieldInputColor" format="color" />
+        <attr name="inputFieldErrorColor" format="color"/>
 
     </declare-styleable>
 

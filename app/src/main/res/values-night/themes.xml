@@ -4,4 +4,25 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="Dark.Theme.Copture" parent="Base.Theme.Copture">
+
+        <item name="mainBackgroundColor">@color/nightBlack</item>
+        <item name="altBackgroundColor">@color/smokyBlack</item>
+        <item name="contrastBackgroundColor">@color/platinum</item>
+        <item name="mainTextColor">@color/brightColor_700</item>
+        <item name="altTextColor">@color/celestialBlue</item>
+        <item name="contrastTextColor">@color/darkColor_700</item>
+        <item name="mainIconColor">@color/royalBlue</item>
+        <item name="altIconColor">?attr/mainTextColor</item>
+        <item name="cardBackgroundColor">@color/darkColor_500</item>
+        <item name="cardElevation">50dp</item>
+        <item name="cardCornerRadius">15dp</item>
+        <item name="inputFieldBackground">?attr/altBackgroundColor</item>
+        <item name="inputFieldIconColor">?attr/mainIconColor</item>
+        <item name="inputFieldHintColor">@color/royalBlue</item>
+        <item name="inputFieldInputColor">?attr/mainTextColor</item>
+        <item name="inputFieldErrorColor">@color/errorColor_900</item>
+
+    </style>
 </resources>
