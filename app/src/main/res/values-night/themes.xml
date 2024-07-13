@@ -15,6 +15,7 @@
         <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
         <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
         <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+
     </style>
 
     <style name="Dark.Theme.Copture" parent="Base.Theme.Copture">
