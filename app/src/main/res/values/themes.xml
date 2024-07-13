@@ -5,9 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
         <!-- Fonts -->
+        <item name="boldFont">@font/koho_bold</item>
         <item name="regularFont">@font/koho_medium</item>
         <item name="semiBoldFont">@font/koho_semibold</item>
-        <item name="boldFont">@font/koho_bold</item>
         <!-- Page Transitions -->
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
@@ -15,6 +15,7 @@
         <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
         <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
         <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+
     </style>
 
     <style name="Light.Theme.Copture" parent="Base.Theme.Copture" >
