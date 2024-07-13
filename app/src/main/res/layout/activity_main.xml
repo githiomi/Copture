@@ -71,7 +71,7 @@
                 android:background="@color/transparent"
                 android:paddingHorizontal="5dp"
                 tools:itemCount="7"
-                tools:listitem=""/>
+                tools:listitem="@layout/recyclerview_home_item"/>
 
         </RelativeLayout>
 
