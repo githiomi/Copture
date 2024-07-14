@@ -6,6 +6,11 @@ android {
     namespace = "com.githiomi.copture"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.githiomi.copture"
         minSdk = 29

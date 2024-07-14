@@ -8,13 +8,20 @@
     android:background="@drawable/authentication_background"
     tools:context=".views.activities.AuthActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_back"
-        android:textColor="?attr/mainTextColor"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/LA_authentication"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:textAllCaps="true" />
+        android:contentDescription="@string/cd_sign_up"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/authentication" />
+
+    <FrameLayout
+        android:id="@+id/FL_authenticationFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/LA_authentication" />
 
 </RelativeLayout>

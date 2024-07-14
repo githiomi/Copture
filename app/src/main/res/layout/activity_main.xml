@@ -25,13 +25,15 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="10dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/IV_profilePicture"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
                     android:contentDescription="@string/home_profile_picture"
-                    android:src="@drawable/traffic_3" />
+                    android:src="@drawable/profile_picture"
+                    app:civ_border_color="?attr/mainTextColor"
+                    app:civ_border_width="2dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -71,7 +73,7 @@
                 android:background="@color/transparent"
                 android:paddingHorizontal="5dp"
                 tools:itemCount="7"
-                tools:listitem="@layout/recyclerview_home_item"/>
+                tools:listitem="@layout/recyclerview_home_item" />
 
         </RelativeLayout>
 
