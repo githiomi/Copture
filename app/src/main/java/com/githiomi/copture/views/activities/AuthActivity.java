@@ -1,6 +1,8 @@
 package com.githiomi.copture.views.activities;
 
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -12,9 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.ActivityAuthBinding;
 import com.githiomi.copture.views.fragments.LoginFragment;
+import com.githiomi.copture.views.fragments.RegisterFragment;
 
 public class AuthActivity extends AppCompatActivity {
 
+    Animation bottomAnimation;
     FrameLayout authenticationFragmentContainer;
 
     @Override
@@ -31,14 +35,24 @@ public class AuthActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Animations
+        bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+
         // View Binding
         bindViews(activityAuthBinding);
+
+        // Animation Binding
+        bindAnimations();
 
         // Inflate
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(authenticationFragmentContainer.getId(), new LoginFragment())
+                .replace(authenticationFragmentContainer.getId(), new RegisterFragment())
                 .commit();
+    }
+
+    private void bindAnimations() {
+        this.authenticationFragmentContainer.setAnimation(bottomAnimation);
     }
 
     private void bindViews(ActivityAuthBinding root){

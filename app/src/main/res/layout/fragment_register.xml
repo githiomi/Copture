@@ -7,7 +7,7 @@
     android:background="@drawable/authentication_form_card"
     android:paddingHorizontal="20dp"
     android:paddingTop="50dp"
-    tools:context=".views.fragments.LoginFragment">
+    tools:context=".views.fragments.RegisterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="?regularFont"
-            android:text="@string/welcome_back"
+            android:text="@string/create_your_account"
             android:textAllCaps="true"
             android:textSize="20sp" />
 
@@ -28,12 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="?boldFont"
-            android:text="@string/login_placeholder"
+            android:text="@string/register_placeholder"
             android:textAllCaps="true"
             android:textSize="28sp" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/CV_loginForm"
+            android:id="@+id/CV_registerForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
@@ -84,7 +84,79 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/IL_loginPassword"
+                    android:id="@+id/IL_firstName"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="15dp"
+                    android:elevation="30dp"
+                    android:hint="@string/first_name_placeholder"
+                    android:textColorHint="?customInputFieldHintColor"
+                    app:boxStrokeColor="@color/green"
+                    app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/green"
+                    app:errorIconTint="?customInputFieldErrorColor"
+                    app:errorTextColor="?customInputFieldErrorColor"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/ic_add_person"
+                    app:startIconTint="@color/green">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="?customInputFieldBackground"
+                        android:fontFamily="@font/koho_semibold"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="?customInputFieldInputColor"
+                        android:textCursorDrawable="@color/primaryColor_700"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_lastName"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="15dp"
+                    android:elevation="30dp"
+                    android:hint="@string/last_name_placeholder"
+                    android:textColorHint="?customInputFieldHintColor"
+                    app:boxStrokeColor="@color/green"
+                    app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/green"
+                    app:errorIconTint="?customInputFieldErrorColor"
+                    app:errorTextColor="?customInputFieldErrorColor"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/ic_add_person"
+                    app:startIconTint="@color/green">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="?customInputFieldBackground"
+                        android:fontFamily="@font/koho_semibold"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="?customInputFieldInputColor"
+                        android:textCursorDrawable="@color/primaryColor_700"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_registerPassword"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,35 +191,41 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_confirmPassword"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="10dp">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="15dp"
+                    android:elevation="30dp"
+                    android:hint="@string/confirm_password_placeholder"
+                    android:textColorHint="?customInputFieldHintColor"
+                    app:boxStrokeColor="@color/green"
+                    app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/green"
+                    app:errorIconTint="?customInputFieldErrorColor"
+                    app:errorTextColor="?customInputFieldErrorColor"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/green">
 
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/CB_rememberMe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@id/TV_forgotPassword"
-                        android:fontFamily="?semiBoldFont"
-                        android:text="@string/remember_me"
-                        app:buttonTint="@color/green"
-                        app:checkedState="checked" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="?customInputFieldBackground"
+                        android:fontFamily="@font/koho_semibold"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textColor="?customInputFieldInputColor"
+                        android:textCursorDrawable="@color/primaryColor_700"
+                        android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/TV_forgotPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:clickable="true"
-                        android:fontFamily="?semiBoldFont"
-                        android:text="@string/forgot_password"
-                        android:textColor="@color/green" />
-
-                </RelativeLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <RelativeLayout
                     android:id="@+id/RL_loginButton"
@@ -160,15 +238,16 @@
                     android:paddingHorizontal="10dp">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/BTN_loginButton"
+                        android:id="@+id/BTN_registerButton"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:background="@color/transparent"
                         android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawablePadding="7dp"
                         android:fontFamily="?boldFont"
                         android:scaleType="centerInside"
-                        android:text="@string/log_in"
+                        android:text="@string/register_placeholder"
                         android:tint="?attr/mainIconColor" />
 
                     <ProgressBar
@@ -194,7 +273,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="?semiBoldFont"
-                        android:text="@string/dont_have_an_account"
+                        android:text="@string/already_have_an_account"
                         android:textColor="?mainTextColor" />
 
                     <TextView
@@ -202,7 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/koho_bold"
-                        android:text="@string/sign_up_here"
+                        android:text="@string/log_in_here"
                         android:textColor="@color/green" />
 
                 </LinearLayout>

@@ -20,4 +20,11 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="sign_up_here">Sign Up Here...</string>
     <string name="dont_have_an_account">Don\'t Have An Account?</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="register_placeholder">Register</string>
+    <string name="first_name_placeholder">First Name</string>
+    <string name="last_name_placeholder">Last Name</string>
+    <string name="confirm_password_placeholder">Confirm Password</string>
+    <string name="already_have_an_account">"Already Have An Account? "</string>
+    <string name="log_in_here">Log In Here...</string>
 </resources>
