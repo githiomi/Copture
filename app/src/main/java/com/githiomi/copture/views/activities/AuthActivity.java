@@ -47,7 +47,7 @@ public class AuthActivity extends AppCompatActivity {
         // Inflate
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(authenticationFragmentContainer.getId(), new RegisterFragment())
+                .replace(authenticationFragmentContainer.getId(), new LoginFragment())
                 .commit();
     }
 

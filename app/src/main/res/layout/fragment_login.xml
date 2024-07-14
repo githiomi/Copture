@@ -16,21 +16,29 @@
         android:background="@color/transparent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/LL_pageHeader"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="?regularFont"
-            android:text="@string/welcome_back"
-            android:textAllCaps="true"
-            android:textSize="20sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="?boldFont"
-            android:text="@string/login_placeholder"
-            android:textAllCaps="true"
-            android:textSize="28sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="?regularFont"
+                android:text="@string/welcome_back"
+                android:textAllCaps="true"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="?boldFont"
+                android:text="@string/login_placeholder"
+                android:textAllCaps="true"
+                android:textSize="28sp" />
+
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/CV_loginForm"
@@ -184,6 +192,7 @@
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/LL_toRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
