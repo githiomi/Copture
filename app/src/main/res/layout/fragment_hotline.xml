@@ -1,14 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.fragments.HotlineFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/RL_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/transparent"
+        android:paddingVertical="5dp">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/IB_ArrowLeft"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_arrow_left"
+            android:tooltipText="Back" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/IB_Search"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_search" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_PageTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RL_toolbar"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/TV_welcomeBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="?attr/regularFont"
+            android:text="@string/get_instant"
+            android:textAllCaps="true"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/TV_OfficerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="?attr/boldFont"
+            android:text="@string/hotline_access"
+            android:textAllCaps="true"
+            android:textSize="27sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LL_PageTitle"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/police_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="?boldFont"
+                        android:padding="25dp"
+                        android:text="@string/police"
+                        android:textAllCaps="true"
+                        android:textColor="?mainTextColor"
+                        android:textSize="30sp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/transparent"
+                        android:padding="20dp"
+                        android:text="@string/click_to_expand"
+                        android:textColor="?mainTextColor" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/cd_police_hotline_access"
+                    android:elevation="10dp"
+                    android:src="@drawable/car" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-5dp"
+                    android:contentDescription="@string/cd_police_hotline_access"
+                    android:elevation="10dp"
+                    android:src="@drawable/lawyer" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dark_bg">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="?boldFont"
+                            android:padding="25dp"
+                            android:text="@string/lawyer"
+                            android:textAllCaps="true"
+                            android:textColor="?contrastTextColor"
+                            android:textSize="30sp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/transparent"
+                            android:padding="20dp"
+                            android:text="@string/click_to_expand"
+                            android:textColor="?contrastTextColor" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/medical_bg">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="?boldFont"
+                            android:padding="25dp"
+                            android:text="@string/medical"
+                            android:textAllCaps="true"
+                            android:textColor="?mainTextColor"
+                            android:textSize="30sp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/transparent"
+                            android:padding="20dp"
+                            android:text="@string/click_to_expand"
+                            android:textColor="?mainTextColor" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="-10dp"
+                    android:contentDescription="@string/cd_police_hotline_access"
+                    android:elevation="10dp"
+                    android:src="@drawable/doctor" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/cd_police_hotline_access"
+                    android:elevation="10dp"
+                    android:src="@drawable/fire_fighter" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/emergency_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="?boldFont"
+                        android:padding="25dp"
+                        android:text="@string/fire_fighter"
+                        android:textAllCaps="true"
+                        android:textColor="?contrastTextColor"
+                        android:textSize="30sp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/transparent"
+                        android:padding="20dp"
+                        android:text="@string/click_to_expand"
+                        android:textColor="?contrastTextColor" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

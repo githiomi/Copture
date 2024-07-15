@@ -31,4 +31,12 @@
     <string name="loading_please_wait">Loading. Please wait...</string>
     <string name="hotline">Hotlines</string>
     <string name="cd_floating_action_button">Floating Action Button</string>
+    <string name="get_instant">Get Instant</string>
+    <string name="hotline_access">Hotline Access</string>
+    <string name="police">Police</string>
+    <string name="click_to_expand">Click To Expand</string>
+    <string name="cd_police_hotline_access">Police Hotline Access</string>
+    <string name="medical">Medical</string>
+    <string name="lawyer">Lawyer</string>
+    <string name="fire_fighter">Fire Fighter</string>
 </resources>

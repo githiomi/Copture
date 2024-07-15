@@ -19,6 +19,7 @@ import com.githiomi.copture.views.fragments.HotlineFragment;
 import com.githiomi.copture.views.fragments.ProfileFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout mainActivityFragmentContainer;
     BottomAppBar bottomAppBar;
     BottomNavigationView bottomNavigationView;
+    FloatingActionButton createFab;
     Animations animations;
 
     @Override
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.FL_mainActivityFragmentContainer, new HomeFragment())
                 .commit();
 
-        // Navigation Listener
+        //  Listeners
+        this.createFab.setOnClickListener( view -> replaceFragment(new CreateFragment()));
         this.bottomNavigationView.setOnItemSelectedListener( item -> {
             int itemId = item.getItemId();
 
@@ -65,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new HomeFragment());
             else if (itemId == R.id.bottom_history)
                 replaceFragment(new HistoryFragment());
-            else if (itemId == R.id.bottom_create)
-                replaceFragment(new CreateFragment());
             else if (itemId == R.id.bottom_call)
                 replaceFragment(new HotlineFragment());
             else if (itemId == R.id.bottom_profile)
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         this.mainActivityFragmentContainer = root.FLMainActivityFragmentContainer;
         this.bottomAppBar = root.BBBottomAppBar;
         this.bottomNavigationView = root.NVBottomNavigationView;
+        this.createFab = root.FABCreate;
     }
 
     private void attachAnimations() {
