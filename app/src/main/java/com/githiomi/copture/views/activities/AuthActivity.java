@@ -16,6 +16,7 @@ import com.githiomi.copture.databinding.ActivityAuthBinding;
 import com.githiomi.copture.utils.Animations;
 import com.githiomi.copture.views.fragments.LoginFragment;
 import com.githiomi.copture.views.fragments.RegisterFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AuthActivity extends AppCompatActivity {
 

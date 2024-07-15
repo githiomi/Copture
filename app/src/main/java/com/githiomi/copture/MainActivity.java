@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -14,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
 import com.githiomi.copture.views.activities.AuthActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     CircleImageView officerProfilePicture;
     Animations animations;
+    CardView navigationCardView;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +53,15 @@ public class MainActivity extends AppCompatActivity {
         this.officerProfilePicture.setOnClickListener( view -> startActivity(new Intent(MainActivity.this, AuthActivity.class)));
     }
 
-    private void setAnimations() {
-        this.officerProfilePicture.setAnimation(this.animations.getFromBottomAnimation());
+    private void inflateViews(ActivityMainBinding root) {
+        this.officerProfilePicture = root.IVProfilePicture;
+        this.navigationCardView = root.CVBottomNavigation;
+        this.bottomNavigationView = root.NVBottomVanigationView;
     }
 
-    private void inflateViews(ActivityMainBinding view) {
-        this.officerProfilePicture = view.IVProfilePicture;
+    private void setAnimations() {
+        this.officerProfilePicture.setAnimation(this.animations.getFromBottomAnimation());
+        this.navigationCardView.setAnimation(this.animations.getFromTopAnimation());
     }
+
 }

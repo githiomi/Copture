@@ -3,6 +3,7 @@ package com.githiomi.copture.views.fragments;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -13,16 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.githiomi.copture.MainActivity;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.FragmentRegisterBinding;
 import com.githiomi.copture.utils.Animations;
-
-import java.util.Objects;
 
 public class RegisterFragment extends Fragment {
 
@@ -75,7 +75,7 @@ public class RegisterFragment extends Fragment {
 
         this.registerCompatButton.setOnClickListener( view -> {
             toggleLoadingStart();
-            new Handler().postDelayed(this::toggleLoadingStop, 2000);
+            new Handler().postDelayed( () -> requireActivity().startActivity(new Intent(requireActivity(), MainActivity.class)), 2000);
         });
 
         return fragmentRegisterBinding.getRoot();

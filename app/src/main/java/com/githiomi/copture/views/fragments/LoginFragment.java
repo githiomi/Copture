@@ -3,6 +3,7 @@ package com.githiomi.copture.views.fragments;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.githiomi.copture.MainActivity;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.FragmentLoginBinding;
 import com.githiomi.copture.utils.Animations;
@@ -71,7 +73,7 @@ public class LoginFragment extends Fragment {
 
         this.loginCompatButton.setOnClickListener(view -> {
             toggleLoadingStart();
-            new Handler().postDelayed(this::toggleLoadingStop, 2000);
+            new Handler().postDelayed( () -> requireActivity().startActivity(new Intent(requireActivity(), MainActivity.class)), 2000);
         });
 
         return fragmentLoginBinding.getRoot();

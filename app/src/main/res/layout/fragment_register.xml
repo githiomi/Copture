@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
             app:cardBackgroundColor="?altBackgroundColor"
-            app:cardCornerRadius="?customCardCornerRadius"
+            app:cardCornerRadius="50dp"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -237,7 +237,7 @@
 
                 <RelativeLayout
                     android:id="@+id/RL_registerButton"
-                    android:layout_width="120dp"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"
                     android:layout_marginHorizontal="7dp"
