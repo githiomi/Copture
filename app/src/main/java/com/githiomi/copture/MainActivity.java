@@ -1,45 +1,28 @@
 package com.githiomi.copture;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
 
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
-import com.githiomi.copture.views.activities.AuthActivity;
+import com.githiomi.copture.views.fragments.HomeFragment;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     // Layout
-    RelativeLayout mainContent, mainData;
-    Animations animations;
-    CircleImageView officerProfilePicture;
-    RecyclerView recyclerView;
-    LinearLayout loadingLayout, newEntry;
-    CardView navigationCardView;
+    FrameLayout mainActivityFragmentContainer;
+    BottomAppBar bottomAppBar;
     BottomNavigationView bottomNavigationView;
-
-    // Data
-    List<String> entries;
+    Animations animations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,44 +45,56 @@ public class MainActivity extends AppCompatActivity {
         animations = new Animations(this);
 
         // Set animations
-        setAnimations();
+        attachAnimations();
 
-        // Set OnClick Listeners
-        this.officerProfilePicture.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AuthActivity.class)));
+        // Attach views
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.FL_mainActivityFragmentContainer, new HomeFragment())
+                .commit();
 
-        // Data
-        this.entries = new ArrayList<>();
+        // Navigation Listener
+//        this.bottomNavigationView.setOnItemSelectedListener( item -> {
+//
+//            switch (item.getItemId()){
+//                case R.id.bottom_home:
+//                    replaceFragment(new HomeFragment());
+//                    break;
+//                case R.id.bottom_history:
+//                    replaceFragment(new HistoryFragment());
+//                    break;
+//                case R.id.bottom_create:
+//                    replaceFragment(new CreateFragment());
+//                    break;
+//                case R.id.bottom_call:
+//                    replaceFragment(new HotlineFragment());
+//                    break;
+//                case R.id.bottom_profile:
+//                    replaceFragment(new ProfileFragment());
+//                    break;
+//            }
+//
+//            return true;
+//        });
+    }
 
-        new Handler().postDelayed(this::toggleData, 2000);
-
-        if (entries.isEmpty()) showNewEntryLayout();
+    private void replaceFragment(Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.FL_mainActivityFragmentContainer, fragment)
+                .setReorderingAllowed(true)
+                .commit();
     }
 
     private void inflateViews(ActivityMainBinding root) {
-        this.mainContent = root.RLMainContent;
-        this.mainData = root.RLMainData;
-        this.loadingLayout = root.LLLoadingLayout;
-        this.officerProfilePicture = root.IVProfilePicture;
-        this.recyclerView = root.RVEntries;
-        this.newEntry = root.LLCreateNewTicket;
-        this.navigationCardView = root.CVBottomNavigation;
-        this.bottomNavigationView = root.NVBottomVanigationView;
+        this.mainActivityFragmentContainer = root.FLMainActivityFragmentContainer;
+        this.bottomAppBar = root.BBBottomAppBar;
+        this.bottomNavigationView = root.NVBottomNavigationView;
     }
 
-    private void setAnimations() {
-        this.mainContent.setAnimation(this.animations.getFromRightAnimation());
-        this.officerProfilePicture.setAnimation(this.animations.getFromBottomAnimation());
-        this.navigationCardView.setAnimation(this.animations.getFromTopAnimation());
-    }
-
-    private void showNewEntryLayout() {
-        this.recyclerView.setVisibility(GONE);
-        this.newEntry.setVisibility(VISIBLE);
-    }
-
-    private void toggleData() {
-        this.loadingLayout.setVisibility(GONE);
-        this.mainData.setVisibility(VISIBLE);
+    private void attachAnimations() {
+        this.mainActivityFragmentContainer.setAnimation(this.animations.getFromTopAnimation());
+        this.bottomAppBar.setAnimation(this.animations.getFromBottomAnimation());
     }
 
 }

@@ -6,13 +6,17 @@
         android:icon="@drawable/ic_car"
         android:title="@string/home" />
     <item
-        android:id="@+id/bottom_create"
-        android:icon="@drawable/ic_add"
-        android:title="@string/create" />
-    <item
         android:id="@+id/bottom_history"
         android:icon="@drawable/ic_time"
         android:title="@string/history" />
+    <item
+        android:id="@+id/bottom_create"
+        android:enabled="false"
+        android:title="" />
+    <item
+        android:id="@+id/bottom_call"
+        android:icon="@drawable/ic_phone"
+        android:title="@string/hotline" />
     <item
         android:id="@+id/bottom_profile"
         android:icon="@drawable/ic_profile"

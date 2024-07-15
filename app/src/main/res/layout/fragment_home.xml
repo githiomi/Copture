@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    tools:context=".views.fragments.HomeFragment">
+
+    <RelativeLayout
+        android:id="@+id/RL_Officer_Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="15dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/IV_profilePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/home_profile_picture"
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="?attr/mainBackgroundColor"
+            app:civ_border_width="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/IV_profilePicture"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TV_welcomeBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="?attr/semiBoldFont"
+                android:text="@string/welcome_back"
+                android:textAllCaps="true" />
+
+            <TextView
+                android:id="@+id/TV_OfficerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="?attr/boldFont"
+                android:text="@string/officer_name_placeholder"
+                android:textAllCaps="true"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_Loading_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/RL_Officer_Info"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminate="true"
+            android:indeterminateBehavior="cycle"
+            android:indeterminateTint="@color/green" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="?semiBoldFont"
+            android:text="@string/loading_please_wait"
+            android:textAlignment="center"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL_MainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/RL_Officer_Info"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_Entries"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            android:background="@color/transparent"
+            android:paddingHorizontal="5dp"
+            tools:itemCount="7"
+            tools:listitem="@layout/recyclerview_home_item" />
+
+        <LinearLayout
+            android:id="@+id/LL_Create_New_Ticket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:visibility="gone">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginVertical="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/create" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/BTN_New_Ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/primary_button"
+                android:drawableStart="@drawable/ic_add"
+                android:drawablePadding="10dp"
+                android:fontFamily="?boldFont"
+                android:paddingHorizontal="15dp"
+                android:text="@string/create_new_ticket" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -20,6 +20,7 @@
 
     <style name="Light.Theme.Copture" parent="Base.Theme.Copture" >
 
+        <item name="colorPrimary">@color/green</item>
         <item name="mainBackgroundColor">@color/platinum</item>
         <item name="altBackgroundColor">@color/white</item>
         <item name="contrastBackgroundColor">@color/smokyBlack</item>

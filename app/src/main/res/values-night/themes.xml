@@ -20,6 +20,7 @@
 
     <style name="Dark.Theme.Copture" parent="Base.Theme.Copture">
 
+        <item name="colorPrimary">@color/green</item>
         <item name="mainBackgroundColor">@color/nightBlack</item>
         <item name="altBackgroundColor">@color/smokyBlack</item>
         <item name="contrastBackgroundColor">@color/platinum</item>

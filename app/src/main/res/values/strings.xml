@@ -29,4 +29,6 @@
     <string name="log_in_here">Log In Here...</string>
     <string name="create_new_ticket">Create New Ticket</string>
     <string name="loading_please_wait">Loading. Please wait...</string>
+    <string name="hotline">Hotlines</string>
+    <string name="cd_floating_action_button">Floating Action Button</string>
 </resources>
