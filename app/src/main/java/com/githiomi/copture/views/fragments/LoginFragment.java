@@ -1,13 +1,20 @@
 package com.githiomi.copture.views.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.githiomi.copture.R;
@@ -18,6 +25,8 @@ public class LoginFragment extends Fragment {
 
     LinearLayout toRegisterText, pageHeader;
     RelativeLayout loginButton;
+    ProgressBar progressBar;
+    AppCompatButton loginCompatButton;
     Animations animations;
 
     public LoginFragment() {
@@ -50,6 +59,7 @@ public class LoginFragment extends Fragment {
         // Bind Animations
         bindAnimation();
 
+        // On Click Listeners
         this.toRegisterText.setOnClickListener(view ->
                 requireActivity()
                         .getSupportFragmentManager()
@@ -59,7 +69,20 @@ public class LoginFragment extends Fragment {
                         .commit()
         );
 
+        this.loginCompatButton.setOnClickListener(view -> {
+            toggleLoadingStart();
+            new Handler().postDelayed(this::toggleLoadingStop, 2000);
+        });
+
         return fragmentLoginBinding.getRoot();
+    }
+
+    private void bindViews(FragmentLoginBinding root) {
+        this.pageHeader = root.LLPageHeader;
+        this.loginButton = root.RLLoginButton;
+        this.progressBar = root.PBLoginProgressBar;
+        this.toRegisterText = root.LLToRegister;
+        this.loginCompatButton = root.BTNLoginButton;
     }
 
     private void bindAnimation() {
@@ -67,10 +90,22 @@ public class LoginFragment extends Fragment {
         this.loginButton.setAnimation(this.animations.getFromRightAnimation());
     }
 
-    private void bindViews(FragmentLoginBinding root) {
-        this.pageHeader = root.LLPageHeader;
-        this.toRegisterText = root.LLToRegister;
-        this.loginButton = root.RLLoginButton;
+    /**
+     * Method to start the button loading state
+     */
+    private void toggleLoadingStart() {
+        this.loginButton.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.primary_loading_button));
+        this.loginCompatButton.setVisibility(GONE);
+        this.progressBar.setVisibility(VISIBLE);
+    }
+
+    /**
+     * Method to stop the button loading state
+     */
+    private void toggleLoadingStop() {
+        this.loginButton.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.primary_button));
+        this.loginCompatButton.setVisibility(VISIBLE);
+        this.progressBar.setVisibility(GONE);
     }
 
 }

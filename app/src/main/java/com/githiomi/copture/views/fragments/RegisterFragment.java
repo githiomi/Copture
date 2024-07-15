@@ -1,23 +1,35 @@
 package com.githiomi.copture.views.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.FragmentRegisterBinding;
 import com.githiomi.copture.utils.Animations;
 
+import java.util.Objects;
+
 public class RegisterFragment extends Fragment {
 
     LinearLayout toLoginText, pageHeader;
     RelativeLayout registerButton;
+    AppCompatButton registerCompatButton;
+    ProgressBar registerProgressBar;
     Animations animations;
 
     public RegisterFragment() {
@@ -61,6 +73,11 @@ public class RegisterFragment extends Fragment {
                     .commit();
         });
 
+        this.registerCompatButton.setOnClickListener( view -> {
+            toggleLoadingStart();
+            new Handler().postDelayed(this::toggleLoadingStop, 2000);
+        });
+
         return fragmentRegisterBinding.getRoot();
     }
 
@@ -68,10 +85,30 @@ public class RegisterFragment extends Fragment {
         this.pageHeader = root.LLPageHeader;
         this.toLoginText = root.LLToLLogin;
         this.registerButton = root.RLRegisterButton;
+        this.registerCompatButton = root.BTNRegisterButton;
+        this.registerProgressBar = root.PBRegisterProgressBar;
     }
 
     private void bindAnimations() {
         this.pageHeader.setAnimation(animations.getFromLeftAnimation());
         this.registerButton.setAnimation(animations.getFromRightAnimation());
+    }
+
+    /**
+     * Method to start button loading start
+     */
+    private void toggleLoadingStart(){
+        this.registerButton.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.primary_loading_button));
+        this.registerCompatButton.setVisibility(GONE);
+        this.registerProgressBar.setVisibility(VISIBLE);
+    }
+
+    /**
+     * Method to stop button loading start
+     */
+    private void toggleLoadingStop(){
+        this.registerButton.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.primary_button));
+        this.registerCompatButton.setVisibility(VISIBLE);
+        this.registerProgressBar.setVisibility(GONE);
     }
 }

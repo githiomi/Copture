@@ -237,8 +237,8 @@
 
                 <RelativeLayout
                     android:id="@+id/RL_registerButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="end"
                     android:layout_marginHorizontal="7dp"
                     android:layout_marginVertical="15dp"
@@ -259,9 +259,9 @@
                         android:tint="?attr/mainIconColor" />
 
                     <ProgressBar
-                        android:id="@+id/PB_loginProgressBar"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:id="@+id/PB_registerProgressBar"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_centerInParent="true"
                         android:indeterminate="true"
                         android:indeterminateBehavior="repeat"

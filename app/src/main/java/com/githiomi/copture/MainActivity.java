@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.githiomi.copture.databinding.ActivityMainBinding;
+import com.githiomi.copture.utils.Animations;
 import com.githiomi.copture.views.activities.AuthActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -19,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     CircleImageView officerProfilePicture;
-    Animation bottomAnimation;
+    Animations animations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         inflateViews(activityMainBinding);
 
         // Init animations
-        bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        animations = new Animations(this);
 
         // Set animations
         setAnimations();
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAnimations() {
-        this.officerProfilePicture.setAnimation(bottomAnimation);
+        this.officerProfilePicture.setAnimation(this.animations.getFromBottomAnimation());
     }
 
     private void inflateViews(ActivityMainBinding view) {
