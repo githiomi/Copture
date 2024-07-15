@@ -13,12 +13,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.ActivityAuthBinding;
+import com.githiomi.copture.utils.Animations;
 import com.githiomi.copture.views.fragments.LoginFragment;
 import com.githiomi.copture.views.fragments.RegisterFragment;
 
 public class AuthActivity extends AppCompatActivity {
 
-    Animation bottomAnimation;
+    Animations animations;
     FrameLayout authenticationFragmentContainer;
 
     @Override
@@ -36,7 +37,7 @@ public class AuthActivity extends AppCompatActivity {
         });
 
         // Animations
-        bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        this.animations = new Animations(this);
 
         // View Binding
         bindViews(activityAuthBinding);
@@ -52,7 +53,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void bindAnimations() {
-        this.authenticationFragmentContainer.setAnimation(bottomAnimation);
+        this.authenticationFragmentContainer.setAnimation(this.animations.getFromBottomAnimation());
     }
 
     private void bindViews(ActivityAuthBinding root){
