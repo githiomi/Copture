@@ -8,71 +8,99 @@
     android:background="@drawable/corner_gradient_background"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:id="@+id/SV_Main_Activity"
+    <RelativeLayout
+        android:id="@+id/RL_MainContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/CV_Bottom_Navigation">
 
         <RelativeLayout
+            android:id="@+id/RL_Officer_Info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp">
 
-            <RelativeLayout
-                android:id="@+id/RL_Officer_Info"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/IV_profilePicture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/home_profile_picture"
+                android:src="@drawable/profile_picture"
+                app:civ_border_color="?attr/mainTextColor"
+                app:civ_border_width="2dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:orientation="horizontal"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="15dp">
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/IV_profilePicture"
+                android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/IV_profilePicture"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:contentDescription="@string/home_profile_picture"
-                    android:src="@drawable/profile_picture"
-                    app:civ_border_color="?attr/mainTextColor"
-                    app:civ_border_width="2dp" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/TV_welcomeBack"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/IV_profilePicture"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:fontFamily="?attr/semiBoldFont"
+                    android:text="@string/welcome_back"
+                    android:textAllCaps="true" />
 
-                    <TextView
-                        android:id="@+id/TV_welcomeBack"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:fontFamily="?attr/semiBoldFont"
-                        android:text="@string/welcome_back"
-                        android:textAllCaps="true" />
+                <TextView
+                    android:id="@+id/TV_OfficerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    android:fontFamily="?attr/boldFont"
+                    android:text="@string/officer_name_placeholder"
+                    android:textAllCaps="true"
+                    android:textSize="22sp" />
 
-                    <TextView
-                        android:id="@+id/TV_OfficerName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
-                        android:fontFamily="?attr/boldFont"
-                        android:text="@string/officer_name_placeholder"
-                        android:textAllCaps="true"
-                        android:textSize="22sp" />
+            </LinearLayout>
 
-                </LinearLayout>
+        </RelativeLayout>
 
-            </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/LL_Loading_Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/RL_Officer_Info"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:indeterminate="true"
+                android:indeterminateBehavior="cycle"
+                android:indeterminateTint="@color/green" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:fontFamily="?semiBoldFont"
+                android:text="@string/loading_please_wait"
+                android:textAlignment="center"
+                android:textAllCaps="true" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL_MainData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/RL_Officer_Info"
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RV_Entries"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/RL_Officer_Info"
+                android:layout_height="match_parent"
                 android:layout_marginVertical="10dp"
                 android:background="@color/transparent"
                 android:paddingHorizontal="5dp"
@@ -82,13 +110,11 @@
             <LinearLayout
                 android:id="@+id/LL_Create_New_Ticket"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/RL_Officer_Info"
-                android:layout_marginVertical="50dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:visibility="gone"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:layout_width="match_parent"
@@ -114,7 +140,7 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CV_Bottom_Navigation"

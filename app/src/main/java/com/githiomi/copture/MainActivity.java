@@ -5,11 +5,9 @@ import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.os.Handler;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.RelativeLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,11 +30,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     // Layout
-    ScrollView scrollView;
+    RelativeLayout mainContent, mainData;
     Animations animations;
     CircleImageView officerProfilePicture;
     RecyclerView recyclerView;
-    LinearLayout newEntry;
+    LinearLayout loadingLayout, newEntry;
     CardView navigationCardView;
     BottomNavigationView bottomNavigationView;
 
@@ -67,16 +65,20 @@ public class MainActivity extends AppCompatActivity {
         setAnimations();
 
         // Set OnClick Listeners
-        this.officerProfilePicture.setOnClickListener( view -> startActivity(new Intent(MainActivity.this, AuthActivity.class)));
+        this.officerProfilePicture.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AuthActivity.class)));
 
         // Data
         this.entries = new ArrayList<>();
 
-        if (entries.isEmpty()) showNewEntry();
+        new Handler().postDelayed(this::toggleData, 2000);
+
+        if (entries.isEmpty()) showNewEntryLayout();
     }
 
     private void inflateViews(ActivityMainBinding root) {
-        this.scrollView = root.SVMainActivity;
+        this.mainContent = root.RLMainContent;
+        this.mainData = root.RLMainData;
+        this.loadingLayout = root.LLLoadingLayout;
         this.officerProfilePicture = root.IVProfilePicture;
         this.recyclerView = root.RVEntries;
         this.newEntry = root.LLCreateNewTicket;
@@ -85,14 +87,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAnimations() {
-        this.scrollView.setAnimation(this.animations.getFromRightAnimation());
+        this.mainContent.setAnimation(this.animations.getFromRightAnimation());
         this.officerProfilePicture.setAnimation(this.animations.getFromBottomAnimation());
         this.navigationCardView.setAnimation(this.animations.getFromTopAnimation());
     }
 
-    private void showNewEntry(){
+    private void showNewEntryLayout() {
         this.recyclerView.setVisibility(GONE);
         this.newEntry.setVisibility(VISIBLE);
+    }
+
+    private void toggleData() {
+        this.loadingLayout.setVisibility(GONE);
+        this.mainData.setVisibility(VISIBLE);
     }
 
 }
