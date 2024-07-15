@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/transparent"
     tools:context=".views.fragments.HotlineFragment">
 
     <RelativeLayout
@@ -75,6 +76,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/RL_PoliceCard"
                 android:layout_width="match_parent"
                 android:layout_height="190dp">
 
@@ -118,6 +120,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/RL_LawyerCard"
                 android:layout_width="match_parent"
                 android:layout_height="190dp">
 
@@ -170,6 +173,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/RL_MedicalCard"
                 android:layout_width="match_parent"
                 android:layout_height="190dp">
 
@@ -219,6 +223,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/RL_FireFighterCard"
                 android:layout_width="match_parent"
                 android:layout_height="190dp">
 
