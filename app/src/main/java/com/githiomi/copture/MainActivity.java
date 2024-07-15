@@ -12,7 +12,11 @@ import androidx.fragment.app.Fragment;
 
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
+import com.githiomi.copture.views.fragments.CreateFragment;
+import com.githiomi.copture.views.fragments.HistoryFragment;
 import com.githiomi.copture.views.fragments.HomeFragment;
+import com.githiomi.copture.views.fragments.HotlineFragment;
+import com.githiomi.copture.views.fragments.ProfileFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -54,28 +58,24 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         // Navigation Listener
-//        this.bottomNavigationView.setOnItemSelectedListener( item -> {
-//
-//            switch (item.getItemId()){
-//                case R.id.bottom_home:
-//                    replaceFragment(new HomeFragment());
-//                    break;
-//                case R.id.bottom_history:
-//                    replaceFragment(new HistoryFragment());
-//                    break;
-//                case R.id.bottom_create:
-//                    replaceFragment(new CreateFragment());
-//                    break;
-//                case R.id.bottom_call:
-//                    replaceFragment(new HotlineFragment());
-//                    break;
-//                case R.id.bottom_profile:
-//                    replaceFragment(new ProfileFragment());
-//                    break;
-//            }
-//
-//            return true;
-//        });
+        this.bottomNavigationView.setOnItemSelectedListener( item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.bottom_home)
+                replaceFragment(new HomeFragment());
+            else if (itemId == R.id.bottom_history)
+                replaceFragment(new HistoryFragment());
+            else if (itemId == R.id.bottom_create)
+                replaceFragment(new CreateFragment());
+            else if (itemId == R.id.bottom_call)
+                replaceFragment(new HotlineFragment());
+            else if (itemId == R.id.bottom_profile)
+                replaceFragment(new ProfileFragment());
+            else
+                return false;
+
+            return true;
+        });
     }
 
     private void replaceFragment(Fragment fragment){
