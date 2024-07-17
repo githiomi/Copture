@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/corner_gradient_background"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".views.activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/FL_mainActivityFragmentContainer"
@@ -21,8 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_margin="15dp"
+        app:navigationIconTint="@color/green"
         android:background="@drawable/authentication_form_card"
+        app:hideOnScroll="true"
+        android:backgroundTint="@color/white"
         app:fabAlignmentMode="center"
         app:fabAnchorMode="cradle"
         app:fabAnimationMode="slide"

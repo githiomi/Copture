@@ -8,7 +8,7 @@
     tools:context=".views.fragments.ProfileFragment">
 
     <RelativeLayout
-        android:id="@+id/RL_toolbar"
+        android:id="@+id/RL_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -22,50 +22,41 @@
             android:layout_alignParentStart="true"
             android:background="@color/transparent"
             android:src="@drawable/ic_arrow_left"
+            android:tint="?mainTextColor"
             android:tooltipText="Back" />
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/LL_PageTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/RL_toolbar"
-        android:orientation="vertical"
-        android:paddingHorizontal="15dp">
-
-        <TextView
-            android:id="@+id/TV_PageSubHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:fontFamily="?attr/regularFont"
-            android:text="@string/view_your"
-            android:textAllCaps="true"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/TV_PageHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:fontFamily="?attr/boldFont"
-            android:text="@string/profile"
-            android:textAllCaps="true"
-            android:textSize="27sp" />
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/LL_PageTitle"
-        android:layout_marginTop="10dp">
+        android:layout_below="@id/RL_Toolbar"
+        android:paddingHorizontal="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TV_PageSubHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="?attr/regularFont"
+                android:text="@string/view_your"
+                android:textAllCaps="true"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/TV_PageHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="?attr/boldFont"
+                android:text="@string/profile"
+                android:textAllCaps="true"
+                android:textSize="27sp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/IV_profilePicture"
@@ -75,7 +66,7 @@
                 android:layout_margin="10dp"
                 android:contentDescription="@string/home_profile_picture"
                 android:src="@drawable/profile_picture"
-                app:civ_border_color="?attr/mainBackgroundColor"
+                app:civ_border_color="@color/green"
                 app:civ_border_width="3dp" />
 
             <TextView
@@ -100,8 +91,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginVertical="10dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
@@ -127,7 +118,8 @@
                             android:fontFamily="?attr/regularFont"
                             android:text="@string/badge_placeholder"
                             android:textAlignment="center"
-                            android:textAllCaps="true" />
+                            android:textAllCaps="true"
+                            android:textColor="?contrastTextColor" />
 
                         <TextView
                             android:id="@+id/TV_BadgeNumber"
@@ -136,8 +128,8 @@
                             android:fontFamily="?attr/boldFont"
                             android:text="@string/badge_number"
                             android:textAlignment="center"
-
                             android:textAllCaps="true"
+                            android:textColor="?contrastTextColor"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -172,7 +164,8 @@
                             android:fontFamily="?attr/regularFont"
                             android:text="@string/station"
                             android:textAlignment="center"
-                            android:textAllCaps="true" />
+                            android:textAllCaps="true"
+                            android:textColor="?contrastTextColor" />
 
                         <TextView
                             android:id="@+id/TV_StationInitials"
@@ -182,6 +175,7 @@
                             android:text="@string/station_initials_placeholder"
                             android:textAlignment="center"
                             android:textAllCaps="true"
+                            android:textColor="?contrastTextColor"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -189,6 +183,140 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_DarkMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/IV_DarkModeThemeIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/icon_background"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_moon"
+                    android:tint="?contrastTextColor" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_toStartOf="@id/MS_ThemeSwitch"
+                    android:layout_toEndOf="@id/IV_DarkModeThemeIcon"
+                    android:fontFamily="?boldFont"
+                    android:text="@string/dark_mode"
+                    android:textSize="17sp" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/MS_ThemeSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@color/green"
+                    android:checked="false"
+                    android:scaleX=".8"
+                    android:scaleY=".8" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_Notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/IV_NotificationsIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/icon_background"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_notifications"
+                    android:tint="?contrastTextColor" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_toStartOf="@id/MS_NotificationsSwitch"
+                    android:layout_toEndOf="@id/IV_NotificationsIcon"
+                    android:fontFamily="?boldFont"
+                    android:text="@string/notifications"
+                    android:textSize="17sp" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/MS_NotificationsSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@color/green"
+                    android:checked="true"
+                    android:scaleX=".8"
+                    android:scaleY=".8"
+                    app:thumbTint="?mainTextColor" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="?attr/boldFont"
+                android:padding="8dp"
+                android:text="@string/profile"
+                android:textAlignment="textStart"
+                android:textAllCaps="true"
+                android:textColor="?mainTextColor"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:id="@+id/RL_EditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/IV_EditProfileIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/icon_background"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_notifications"
+                    android:tint="?contrastTextColor" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_toStartOf="@id/IB_EditProfileIcon"
+                    android:layout_toEndOf="@id/IV_EditProfileIcon"
+                    android:fontFamily="?boldFont"
+                    android:text="@string/edit_profile"
+                    android:textSize="17sp" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/IB_EditProfileIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_short_arrow_right"
+                    android:tint="@color/green"
+                    android:tooltipText="Back" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

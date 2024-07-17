@@ -1,4 +1,4 @@
-package com.githiomi.copture;
+package com.githiomi.copture.views.activities;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
 import com.githiomi.copture.views.fragments.CreateFragment;
@@ -60,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         //  Listeners
-        this.createFab.setOnClickListener( view -> replaceFragment(new CreateFragment()));
-        this.bottomNavigationView.setOnItemSelectedListener( item -> {
+        this.createFab.setOnClickListener(view -> replaceFragment(new CreateFragment()));
+        this.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
             if (itemId == R.id.bottom_home)
                 replaceFragment(new HomeFragment());
             else if (itemId == R.id.bottom_history)
                 replaceFragment(new HistoryFragment());
+            else if (itemId == R.id.bottom_create)
+                return true;
             else if (itemId == R.id.bottom_call)
                 replaceFragment(new HotlineFragment());
             else if (itemId == R.id.bottom_profile)
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.FL_mainActivityFragmentContainer, fragment)

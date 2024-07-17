@@ -14,12 +14,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.githiomi.copture.MainActivity;
+import com.githiomi.copture.views.activities.MainActivity;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.FragmentRegisterBinding;
 import com.githiomi.copture.utils.Animations;

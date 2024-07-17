@@ -45,4 +45,7 @@
     <string name="badge_placeholder">Badge:</string>
     <string name="station_initials_placeholder">GB-TP</string>
     <string name="station">Station:</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="notifications">Notifications</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
