@@ -4,10 +4,14 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="statusBarBackground">@color/transparent</item>
         <!-- Fonts -->
         <item name="boldFont">@font/koho_bold</item>
         <item name="regularFont">@font/koho_medium</item>
         <item name="semiBoldFont">@font/koho_semibold</item>
+        <item name="android:textColor">?mainTextColor</item>
         <!-- Page Transitions -->
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
