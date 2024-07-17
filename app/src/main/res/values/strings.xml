@@ -48,4 +48,9 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="notifications">Notifications</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="log_out">Log Out</string>
+    <string name="cd_change_password_icon">Change Password Icon</string>
+    <string name="cd_edit_profile_icon">Edit Profile Icon</string>
+    <string name="cd_back_arrow">Back Arrow</string>
 </resources>

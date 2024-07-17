@@ -21,6 +21,7 @@
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:background="@color/transparent"
+            android:contentDescription="@string/cd_back_arrow"
             android:src="@drawable/ic_arrow_left"
             android:tint="?mainTextColor"
             android:tooltipText="Back" />
@@ -30,6 +31,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/TV_Copyright"
         android:layout_below="@id/RL_Toolbar"
         android:paddingHorizontal="15dp">
 
@@ -89,6 +91,7 @@
                 android:textSize="27sp" />
 
             <LinearLayout
+                android:id="@+id/LL_BadgeCards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
@@ -291,8 +294,8 @@
                     android:layout_height="40dp"
                     android:layout_margin="5dp"
                     android:background="@drawable/icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_notifications"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_profile_filled"
                     android:tint="?contrastTextColor" />
 
                 <TextView
@@ -312,14 +315,106 @@
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:background="@color/transparent"
+                    android:contentDescription="@string/cd_edit_profile_icon"
                     android:src="@drawable/ic_short_arrow_right"
                     android:tint="@color/green"
                     android:tooltipText="Back" />
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/RL_ChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/IV_ChangePasswordIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/icon_background"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_key"
+                    android:tint="?contrastTextColor" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_toStartOf="@id/IB_ChangePasswordIcon"
+                    android:layout_toEndOf="@id/IV_ChangePasswordIcon"
+                    android:fontFamily="?boldFont"
+                    android:text="@string/change_password"
+                    android:textSize="17sp" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/IB_ChangePasswordIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/transparent"
+                    android:contentDescription="@string/cd_change_password_icon"
+                    android:src="@drawable/ic_short_arrow_right"
+                    android:tint="@color/green"
+                    android:tooltipText="Back" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RL_logoutButton"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="7dp"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/primary_button"
+                android:clickable="true"
+                android:paddingHorizontal="10dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/BTN_loginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/transparent"
+                    android:drawableEnd="@drawable/ic_exit"
+                    android:fontFamily="?boldFont"
+                    android:scaleType="centerInside"
+                    android:text="@string/log_out"
+                    android:textColor="?contrastTextColor"
+                    android:textSize="17sp" />
+
+                <ProgressBar
+                    android:id="@+id/PB_loginProgressBar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:indeterminateBehavior="repeat"
+                    android:indeterminateTint="?mainTextColor"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/TV_Copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="?boldFont"
+        android:letterSpacing=".01"
+        android:text="Application Version: 1.0. Daniel Githiomi"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/smokyBlack"
+        android:textSize="10sp" />
 
 </RelativeLayout>
