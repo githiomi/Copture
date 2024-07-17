@@ -1,4 +1,4 @@
-package com.githiomi.copture.models;
+package com.githiomi.copture.data.models.models;
 
 import lombok.Data;
 

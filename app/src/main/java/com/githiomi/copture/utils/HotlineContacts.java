@@ -1,6 +1,6 @@
 package com.githiomi.copture.utils;
 
-import com.githiomi.copture.models.Hotline;
+import com.githiomi.copture.data.models.models.Hotline;
 
 public enum HotlineContacts {
 
@@ -28,9 +28,5 @@ public enum HotlineContacts {
     FIRE_SERVICES_2(new Hotline("Fire fighter Services 2", 115L)),
     RAPID_RESPONSE(new Hotline("Fire Rapid Response", 4543L));
 
-    private final Hotline hotline;
-
-    HotlineContacts(Hotline hotline) {
-        this.hotline = hotline;
-    }
+    HotlineContacts(Hotline hotline) {}
 }
