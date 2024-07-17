@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingHorizontal="15dp"
+    android:paddingHorizontal="10dp"
     android:paddingTop="8dp">
 
     <TextView
@@ -13,6 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_toStartOf="@id/IB_HotlineItemButton"
         android:fontFamily="?semiBoldFont"
+        android:paddingHorizontal="10dp"
         android:text="@string/hotline_placeholder"
         android:textSize="16sp" />
 
@@ -25,11 +26,13 @@
         android:layout_margin="5dp"
         android:background="@color/transparent"
         android:contentDescription="@string/cd_edit_profile_icon"
+        android:paddingHorizontal="10dp"
         android:src="@drawable/ic_phone"
         android:tint="@color/green"
         android:tooltipText="Back" />
 
     <View
+        android:id="@+id/V_itemSeparator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/TV_HotlineItemText"

@@ -1,7 +1,10 @@
 package com.githiomi.copture.utils;
 
-import com.githiomi.copture.data.models.models.Hotline;
+import com.githiomi.copture.data.models.Hotline;
 
+import lombok.Getter;
+
+@Getter
 public enum HotlineContacts {
 
     // Police Stations
@@ -28,5 +31,14 @@ public enum HotlineContacts {
     FIRE_SERVICES_2(new Hotline("Fire fighter Services 2", 115L)),
     RAPID_RESPONSE(new Hotline("Fire Rapid Response", 4543L));
 
-    HotlineContacts(Hotline hotline) {}
+    private final Hotline hotline;
+
+    HotlineContacts(Hotline hotline) {
+        this.hotline = hotline;
+    }
+
+    public Hotline getHotline() {
+        return this.hotline;
+    }
+
 }
