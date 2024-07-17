@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.lottie)
     implementation(libs.circleimageview)
+    implementation(libs.lombok)
+    implementation(libs.projectlombok.lombok)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

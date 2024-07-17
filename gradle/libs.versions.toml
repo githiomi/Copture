@@ -9,6 +9,8 @@ activity = "1.9.0"
 constraintlayout = "2.1.4"
 circleimageview = "3.1.0"
 lottie = "6.4.1"
+lombok = "1.18.34"
+lombokVersion = "1.18.30"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -20,6 +22,8 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 lottie = {group = "com.airbnb.android", name = "lottie", version.ref = "lottie"}
+lombok = {group = "com.project", name = "lombok", version.ref = "lombok"}
+projectlombok-lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombokVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
