@@ -26,15 +26,8 @@ public class HotlineAdapter extends RecyclerView.Adapter<HotlineAdapter.HotlineV
     Context context;
     List<Hotline> hotlines;
 
-    public HotlineAdapter(Context context) {
-        this.hotlines = new ArrayList<>(Arrays.asList(
-                HotlineContacts.C_CARE.getHotline(),
-                HotlineContacts.SAMU.getHotline(),
-                HotlineContacts.SSR.getHotline(),
-                HotlineContacts.FIRE_SERVICES_1.getHotline(),
-                HotlineContacts.FIRE_SERVICES_2.getHotline(),
-                HotlineContacts.RAPID_RESPONSE.getHotline()
-        ));
+    public HotlineAdapter(Context context, List<Hotline> hotlines) {
+        this.hotlines = hotlines;
         this.context = context;
     }
 

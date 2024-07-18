@@ -1,5 +1,6 @@
 package com.githiomi.copture.views.fragments;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.os.Bundle;
@@ -14,8 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.githiomi.copture.data.adapters.HotlineAdapter;
+import com.githiomi.copture.data.enums.HotlineContacts;
+import com.githiomi.copture.data.models.Hotline;
 import com.githiomi.copture.databinding.FragmentHotlineBinding;
 import com.githiomi.copture.utils.Animations;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HotlineFragment extends Fragment {
 
@@ -51,14 +58,10 @@ public class HotlineFragment extends Fragment {
         attachAnimations();
 
         // On click listeners
-        this.policeCard.setOnClickListener(view -> {
-            int visibility = this.policeRecyclerView.getVisibility() == View.GONE ? VISIBLE : View.GONE;
-            this.policeRecyclerView.setVisibility(visibility);
-            this.policeRecyclerView.setAnimation(new Animations(getContext()).getFromTopAnimation());
-        });
-
-        // Set adapter
-        setAdapter();
+        this.policeCard.setOnClickListener(view -> cardOnClickListener(policeRecyclerView, "police"));
+        this.lawyerCard.setOnClickListener(view -> cardOnClickListener(lawyerRecyclerView, "lawyer"));
+        this.medicalCard.setOnClickListener(view -> cardOnClickListener(medicalRecyclerView, "medical"));
+        this.fireFighterCard.setOnClickListener(view -> cardOnClickListener(fireFighterRecyclerView, "firefighter"));
 
         return fragmentHotlineBinding.getRoot();
     }
@@ -72,8 +75,11 @@ public class HotlineFragment extends Fragment {
         this.policeCard = root.RLPoliceCard;
         this.policeRecyclerView = root.RVPoliceDetails;
         this.lawyerCard = root.RLLawyerCard;
+        this.lawyerRecyclerView = root.RVLawyerDetails;
         this.medicalCard = root.RLMedicalCard;
+        this.medicalRecyclerView = root.RVMedicalDetails;
         this.fireFighterCard = root.RLFireFighterCard;
+        this.fireFighterRecyclerView = root.RVFireFighterDetails;
     }
 
     /**
@@ -87,12 +93,80 @@ public class HotlineFragment extends Fragment {
     }
 
     /**
+     * Method to set an on click listener to the hotline card vies
+     *
+     * @param recyclerView the respective recycler view for the category
+     * @param category     the category of the card view
+     */
+    private void cardOnClickListener(RecyclerView recyclerView, String category) {
+        int visibility = recyclerView.getVisibility() == GONE ? VISIBLE : GONE;
+        recyclerView.setVisibility(visibility);
+
+        if (visibility == VISIBLE) {
+            // Get data from the hotline contact enum
+            setAdapter(recyclerView, getAdapterData(category));
+            recyclerView.setAnimation(new Animations(getContext()).getFromTopAnimation());
+        }
+    }
+
+    /**
+     * Method to get the respective hotline contact data
+     *
+     * @param hotlineCategory The category for which to get the contact data
+     * @return the list of category contact data
+     */
+    private List<Hotline> getAdapterData(String hotlineCategory) {
+
+        List<Hotline> adapterData;
+
+        switch (hotlineCategory) {
+            case "police":
+                adapterData = new ArrayList<>(Arrays.asList(
+                        HotlineContacts.DIRECT.getHotline(),
+                        HotlineContacts.CID.getHotline(),
+                        HotlineContacts.POLICE_INFO.getHotline(),
+                        HotlineContacts.NORTH.getHotline(),
+                        HotlineContacts.SOUTH.getHotline(),
+                        HotlineContacts.CENTRAL.getHotline(),
+                        HotlineContacts.EAST.getHotline(),
+                        HotlineContacts.WEST.getHotline()
+                ));
+                break;
+            case "lawyer":
+                adapterData = new ArrayList<>(Arrays.asList(
+                        HotlineContacts.SUPREME.getHotline(),
+                        HotlineContacts.MAGISTRATE.getHotline()
+                ));
+                break;
+            case "medical":
+                adapterData = new ArrayList<>(Arrays.asList(
+                        HotlineContacts.SAMU.getHotline(),
+                        HotlineContacts.C_CARE.getHotline(),
+                        HotlineContacts.SSR.getHotline()
+                ));
+                break;
+            case "firefighter":
+                adapterData = new ArrayList<>(Arrays.asList(
+                        HotlineContacts.FIRE_SERVICES_1.getHotline(),
+                        HotlineContacts.FIRE_SERVICES_2.getHotline(),
+                        HotlineContacts.RAPID_RESPONSE.getHotline()
+                ));
+                break;
+            default:
+                adapterData = new ArrayList<>();
+                break;
+        }
+        return adapterData;
+    }
+
+    /**
      * Method to set adapter to the recycler view
      */
-    private void setAdapter() {
-        HotlineAdapter hotlineAdapter = new HotlineAdapter(getContext());
-        this.policeRecyclerView.setAdapter(hotlineAdapter);
-        this.policeRecyclerView.setHasFixedSize(true);
-        this.policeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    private void setAdapter(RecyclerView recyclerView, List<Hotline> hotlines) {
+        HotlineAdapter hotlineAdapter = new HotlineAdapter(getContext(), hotlines);
+        recyclerView.setAdapter(hotlineAdapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
+
 }
