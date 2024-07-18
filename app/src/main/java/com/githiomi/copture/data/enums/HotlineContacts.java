@@ -1,4 +1,4 @@
-package com.githiomi.copture.utils;
+package com.githiomi.copture.data.enums;
 
 import com.githiomi.copture.data.models.Hotline;
 

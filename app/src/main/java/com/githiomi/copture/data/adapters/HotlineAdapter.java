@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.githiomi.copture.R;
 import com.githiomi.copture.data.models.Hotline;
-import com.githiomi.copture.utils.HotlineContacts;
+import com.githiomi.copture.data.enums.HotlineContacts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
