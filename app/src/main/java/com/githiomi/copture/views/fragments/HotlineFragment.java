@@ -1,13 +1,18 @@
 package com.githiomi.copture.views.fragments;
 
+import static android.content.Intent.ACTION_DIAL;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.githiomi.copture.data.adapters.HotlineAdapter;
 import com.githiomi.copture.data.enums.HotlineContacts;
+import com.githiomi.copture.data.interfaces.RecyclerViewItemClickListener;
 import com.githiomi.copture.data.models.Hotline;
 import com.githiomi.copture.databinding.FragmentHotlineBinding;
 import com.githiomi.copture.utils.Animations;
@@ -24,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HotlineFragment extends Fragment {
+public class HotlineFragment extends Fragment implements RecyclerViewItemClickListener<Hotline> {
 
     // Layout
     Animations animations;
@@ -163,10 +169,28 @@ public class HotlineFragment extends Fragment {
      * Method to set adapter to the recycler view
      */
     private void setAdapter(RecyclerView recyclerView, List<Hotline> hotlines) {
-        HotlineAdapter hotlineAdapter = new HotlineAdapter(getContext(), hotlines);
+        HotlineAdapter hotlineAdapter = new HotlineAdapter(getContext(), hotlines, this);
         recyclerView.setAdapter(hotlineAdapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    /**
+     * Method to open call application when item is clicked
+     *
+     * @param recyclerViewPosition this is the position of the item clicked
+     * @param hotlines             the hotlines in the respective recycler view
+     */
+    @Override
+    public void setOnRecyclerItemClick(int recyclerViewPosition, List<Hotline> hotlines) {
+
+        try {
+            requireActivity().startActivity(
+                            new Intent(ACTION_DIAL, Uri.parse("tel:" + hotlines.get(recyclerViewPosition).getHotlineNumber()))
+            );
+        } catch (ActivityNotFoundException e) {
+            System.out.println("Activity not found exception: " + e.getLocalizedMessage());
+            Toast.makeText(getContext(), "Call app not found", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

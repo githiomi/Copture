@@ -13,11 +13,9 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.githiomi.copture.R;
+import com.githiomi.copture.data.interfaces.RecyclerViewItemClickListener;
 import com.githiomi.copture.data.models.Hotline;
-import com.githiomi.copture.data.enums.HotlineContacts;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HotlineAdapter extends RecyclerView.Adapter<HotlineAdapter.HotlineViewHolder> {
@@ -25,16 +23,18 @@ public class HotlineAdapter extends RecyclerView.Adapter<HotlineAdapter.HotlineV
     // Adapter Dependencies
     Context context;
     List<Hotline> hotlines;
+    RecyclerViewItemClickListener<Hotline> recyclerViewItemClickListener;
 
-    public HotlineAdapter(Context context, List<Hotline> hotlines) {
-        this.hotlines = hotlines;
+    public HotlineAdapter(Context context, List<Hotline> hotlines, RecyclerViewItemClickListener<Hotline> recyclerViewItemClickListener) {
         this.context = context;
+        this.hotlines = hotlines;
+        this.recyclerViewItemClickListener = recyclerViewItemClickListener;
     }
 
     @NonNull
     @Override
     public HotlineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HotlineViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.hotline_recycler_view_item, parent, false));
+        return new HotlineViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.hotline_recycler_view_item, parent, false), recyclerViewItemClickListener, this.hotlines);
     }
 
     @Override
@@ -61,11 +61,17 @@ public class HotlineAdapter extends RecyclerView.Adapter<HotlineAdapter.HotlineV
         AppCompatImageButton hotlineCallIcon;
         View itemSeparator;
 
-        public HotlineViewHolder(@NonNull View itemView) {
+        public HotlineViewHolder(@NonNull View itemView, RecyclerViewItemClickListener<Hotline> listener, List<Hotline> hotlines) {
             super(itemView);
             this.hotlineDescription = itemView.findViewById(R.id.TV_HotlineItemText);
             this.hotlineCallIcon = itemView.findViewById(R.id.IB_HotlineItemButton);
             this.itemSeparator = itemView.findViewById(R.id.V_itemSeparator);
+
+            // OnClick listener
+            itemView.setOnClickListener(view -> {
+                if (listener != null)
+                    listener.setOnRecyclerItemClick(getAdapterPosition(), hotlines);
+            });
         }
     }
 }
