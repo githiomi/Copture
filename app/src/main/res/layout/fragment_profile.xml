@@ -126,7 +126,7 @@
                             android:text="@string/badge_placeholder"
                             android:textAlignment="center"
                             android:textAllCaps="true"
-                            android:textColor="?contrastTextColor" />
+                            android:textColor="?mainTextColor" />
 
                         <TextView
                             android:id="@+id/TV_BadgeNumber"
@@ -136,7 +136,7 @@
                             android:text="@string/badge_number"
                             android:textAlignment="center"
                             android:textAllCaps="true"
-                            android:textColor="?contrastTextColor"
+                            android:textColor="?mainTextColor"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -172,7 +172,7 @@
                             android:text="@string/station"
                             android:textAlignment="center"
                             android:textAllCaps="true"
-                            android:textColor="?contrastTextColor" />
+                            android:textColor="?mainTextColor" />
 
                         <TextView
                             android:id="@+id/TV_StationInitials"
@@ -182,7 +182,7 @@
                             android:text="@string/station_initials_placeholder"
                             android:textAlignment="center"
                             android:textAllCaps="true"
-                            android:textColor="?contrastTextColor"
+                            android:textColor="?mainTextColor"
                             android:textSize="18sp" />
 
                     </LinearLayout>

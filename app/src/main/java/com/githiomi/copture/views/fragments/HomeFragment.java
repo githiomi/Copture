@@ -6,6 +6,7 @@ import static android.view.View.VISIBLE;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     // Layouts
     RelativeLayout officerProfileInfo, mainContent;
     RecyclerView recyclerView;
+    AppCompatButton createNewTicketButton;
     LinearLayout loadingLayout, newEntry;
 
     // Data
@@ -66,7 +68,19 @@ public class HomeFragment extends Fragment {
 
         if (entries.isEmpty()) showNewEntryLayout();
 
+        // Listeners
+        this.createNewTicketButton.setOnClickListener(view -> this.replaceFragment(new CreateFragment()));
+
         return fragmentHomeBinding.getRoot();
+    }
+
+    private void replaceFragment(Fragment fragment){
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.FL_mainActivityFragmentContainer, fragment)
+                .setReorderingAllowed(true)
+                .commit();
     }
 
     private void inflateViews(FragmentHomeBinding root){
@@ -75,6 +89,7 @@ public class HomeFragment extends Fragment {
         this.mainContent = root.RLMainContent;
         this.recyclerView = root.RVEntries;
         this.newEntry = root.LLCreateNewTicket;
+        this.createNewTicketButton = root.BTNNewTicket;
     }
 
     private void attachAnimations(){

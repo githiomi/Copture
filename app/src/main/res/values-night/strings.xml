@@ -55,4 +55,6 @@
     <string name="cd_back_arrow">Back Arrow</string>
     <string name="copyright">Application Version: 1.0. Daniel Githiomi</string>
     <string name="hotline_placeholder">Riviere du Rempart Police Station</string>
+    <string name="scan_placeholder">Scan Driver\'s License</string>
+    <string name="cd_new_ticket_item_icon">New Ticket Item Icon</string>
 </resources>
