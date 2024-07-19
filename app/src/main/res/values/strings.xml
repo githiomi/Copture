@@ -57,4 +57,6 @@
     <string name="hotline_placeholder">Riviere du Rempart Police Station</string>
     <string name="scan_placeholder">Scan Driver\'s License</string>
     <string name="cd_new_ticket_item_icon">New Ticket Item Icon</string>
+    <string name="create_a_new">Create A New</string>
+    <string name="citation_ticket">Citation Ticket</string>
 </resources>

@@ -13,7 +13,7 @@ public enum ScanItems {
     VEHICLE_FRONT(new ScanItem(R.drawable.ic_scan, "Vehicle's Front Profile")),
     VEHICLE_BACK(new ScanItem(R.drawable.ic_scan, "Vehicle's Back Profile"));
 
-    private ScanItem scanItem;
+    private final ScanItem scanItem;
 
     ScanItems(ScanItem scanItem){
         this.scanItem = scanItem;
