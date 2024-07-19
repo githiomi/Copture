@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     Animations animations;
     LottieAnimationView scanAnimationView;
     RecyclerView createNewTicketRecyclerView;
+    AppCompatButton createNewTicketButton;
 
     public CreateFragment() {
         // Required empty public constructor

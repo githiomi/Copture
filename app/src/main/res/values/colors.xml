@@ -69,5 +69,6 @@
     <color name="eerieBlack">#111D13</color>
     <color name="dullBlack">#25242C</color>
     <color name="raisinBlack">#2E2E3A</color>
+    <color name="disableGray">#EBEBE4</color>
 
 </resources>

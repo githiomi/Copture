@@ -59,4 +59,5 @@
     <string name="cd_new_ticket_item_icon">New Ticket Item Icon</string>
     <string name="create_a_new">Create A New</string>
     <string name="citation_ticket">Citation Ticket</string>
+    <string name="submit_ticket">Submit Ticket</string>
 </resources>
