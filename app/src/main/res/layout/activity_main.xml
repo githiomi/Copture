@@ -22,23 +22,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_margin="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/authentication_form_card"
         android:backgroundTint="@color/white"
         app:fabAlignmentMode="center"
         app:fabAnchorMode="cradle"
         app:fabAnimationMode="slide"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="50dp"
+        app:fabCradleMargin="7dp"
+        app:fabCradleRoundedCornerRadius="40dp"
         app:fabCradleVerticalOffset="10dp"
-        app:hideOnScroll="true">
+        app:hideOnScroll="true"
+        app:navigationIconTint="@color/green"
+        app:titleMarginBottom="0dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/NV_BottomNavigationView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:padding="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:itemRippleColor="@color/transparent"
+            app:itemTextAppearanceActive="@color/green"
+            app:itemTextAppearanceActiveBoldEnabled="true"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_menu" />
 
@@ -51,6 +56,7 @@
         android:backgroundTint="@color/green"
         android:contentDescription="@string/cd_floating_action_button"
         android:src="@drawable/ic_add"
+        app:fabCustomSize="40dp"
         app:fabSize="mini"
         app:layout_anchor="@id/BB_Bottom_App_bar"
         app:maxImageSize="30dp"
