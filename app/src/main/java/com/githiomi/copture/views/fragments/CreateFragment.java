@@ -4,9 +4,13 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.githiomi.copture.R;
 import com.githiomi.copture.data.adapters.ScanAdapter;
 import com.githiomi.copture.data.interfaces.RecyclerViewItemClickListener;
 import com.githiomi.copture.data.models.ScanItem;
@@ -43,7 +48,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     AppCompatButton submitTicketButton;
 
     // Data
-    ActivityResultLauncher<String> image;
+    ActivityResultLauncher<Intent> imageCaptureLauncher;
 
     public CreateFragment() {
     }
@@ -62,10 +67,20 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         FragmentCreateBinding fragmentCreateBinding = FragmentCreateBinding.inflate(inflater, container, false);
 
         // Init activity
-        this.image = registerForActivityResult(
-                new ActivityResultContracts.GetContent(),
+        this.imageCaptureLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    System.out.println("Gotten result -> " + result);
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // Handle the image result here
+                        assert result.getData() != null;
+                        Bundle extras = result.getData().getExtras();
+                        assert extras != null;
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        // Redirect to a new fragment and pass the image
+                        replaceFragment(imageBitmap);
+                    } else {
+                        Toast.makeText(getContext(), "Image capture failed", Toast.LENGTH_SHORT).show();
+                    }
                 }
         );
 
@@ -96,14 +111,34 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         return fragmentCreateBinding.getRoot();
     }
 
+    private void replaceFragment(Bitmap imageBitmap) {
+        new ImageFragment();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.FL_mainActivityFragmentContainer, ImageFragment.newInstance(imageBitmap))
+                .setReorderingAllowed(true)
+                .commit();
+    }
+
     @Override
     public void setOnRecyclerItemClick(int recyclerViewPosition, List<ScanItem> recyclerViewItems, View itemView) {
-        Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+//        Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, 101);
 
-        image.launch("image/*");
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        try {
+            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                imageCaptureLauncher.launch(intent);
+            }
+        } catch (ActivityNotFoundException e) {
+            System.out.println("Image Capture Error: " + e.getLocalizedMessage());
+            Toast.makeText(getContext(), "Could not open camera", Toast.LENGTH_SHORT).show();
+        }
+
 
 //        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //

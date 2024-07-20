@@ -7,7 +7,8 @@
     android:gravity="center"
     android:paddingHorizontal="10dp"
     android:paddingTop="8dp"
-    app:cardCornerRadius="?customCardCornerRadius">
+    app:cardCornerRadius="?customCardCornerRadius"
+    app:cardElevation="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,12 +34,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/IB_NewTicketItemButton"
+            android:layout_marginHorizontal="5dp"
             android:layout_toStartOf="@id/IB_NewTicketArrowItemButton"
+            android:layout_toEndOf="@id/IB_NewTicketItemButton"
             android:fontFamily="?semiBoldFont"
-            android:paddingHorizontal="10dp"
             android:text="@string/scan_placeholder"
-            android:textSize="16sp" />
+            android:textAllCaps="true"
+            android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/IB_NewTicketArrowItemButton"
