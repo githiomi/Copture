@@ -71,21 +71,15 @@
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/credentials" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RV_CreateNewTicket"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="10dp"
-                tools:itemCount="5"
-                tools:listitem="@layout/new_ticket_recycler_view_item" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/CB_CreateNewTicket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginVertical="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/primary_button"
+                android:clickable="true"
                 android:drawableStart="@drawable/ic_add"
                 android:drawablePadding="5dp"
                 android:enabled="false"
@@ -93,6 +87,25 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
                 android:text="@string/submit_ticket" />
+
+            <TextView
+                android:id="@+id/TV_ErrorRequiredFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:text="@string/err_required_fields_data_missing"
+                android:textColor="@color/errorColor_900"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RV_CreateNewTicket"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="10dp"
+                tools:itemCount="5"
+                tools:listitem="@layout/new_ticket_recycler_view_item" />
 
         </LinearLayout>
 

@@ -60,4 +60,5 @@
     <string name="create_a_new">Create A New</string>
     <string name="citation_ticket">Citation Ticket</string>
     <string name="submit_ticket">Submit Ticket</string>
+    <string name="err_required_fields_data_missing">*Required Fields Data Missing</string>
 </resources>

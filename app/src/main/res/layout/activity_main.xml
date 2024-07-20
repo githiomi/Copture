@@ -18,14 +18,12 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/BB_Bottom_App_bar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-        android:layout_margin="15dp"
-        app:navigationIconTint="@color/green"
+        android:layout_margin="10dp"
         android:background="@drawable/authentication_form_card"
-        app:hideOnScroll="true"
         android:backgroundTint="@color/white"
         app:fabAlignmentMode="center"
         app:fabAnchorMode="cradle"
@@ -33,14 +31,14 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp"
         app:fabCradleVerticalOffset="10dp"
-        app:titleMarginBottom="0dp">
+        app:hideOnScroll="true">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/NV_BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent"
-            app:itemTextColor="?mainTextColor"
+            android:layout_margin="0dp"
+            android:padding="0dp"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_menu" />
 
@@ -55,7 +53,7 @@
         android:src="@drawable/ic_add"
         app:fabSize="mini"
         app:layout_anchor="@id/BB_Bottom_App_bar"
-        app:maxImageSize="25dp"
+        app:maxImageSize="30dp"
         app:tint="@color/white" />
 
     <!--    <androidx.cardview.widget.CardView-->

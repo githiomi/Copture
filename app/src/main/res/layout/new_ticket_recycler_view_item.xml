@@ -50,8 +50,7 @@
             android:background="@color/transparent"
             android:contentDescription="@string/cd_new_ticket_item_icon"
             android:paddingHorizontal="10dp"
-            android:src="@drawable/ic_short_arrow_right"
-            android:tint="@color/green"
+            android:src="@drawable/ic_clear"
             android:tooltipText="Back" />
 
     </RelativeLayout>

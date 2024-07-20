@@ -50,7 +50,7 @@ public class ScanAdapter extends RecyclerView.Adapter<ScanAdapter.ScanAdapterVie
     @NonNull
     @Override
     public ScanAdapter.ScanAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ScanAdapterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.new_ticket_recycler_view_item, parent, false), scanItemRecyclerViewItemClickListener, recyclerViewItems);
+        return new ScanAdapterViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.new_ticket_recycler_view_item, parent, false), context, scanItemRecyclerViewItemClickListener, recyclerViewItems);
     }
 
     @Override
@@ -60,9 +60,7 @@ public class ScanAdapter extends RecyclerView.Adapter<ScanAdapter.ScanAdapterVie
         ScanItem scanItem = this.recyclerViewItems.get(position);
 
         // Set Item Data
-        holder.scanItemIcon.setImageDrawable(ContextCompat.getDrawable(context, scanItem.getScanItemIcon()));
-        holder.scanItemText.setText(scanItem.getScanItemName());
-
+        holder.bind(scanItem);
     }
 
     @Override
@@ -73,19 +71,27 @@ public class ScanAdapter extends RecyclerView.Adapter<ScanAdapter.ScanAdapterVie
     public static class ScanAdapterViewHolder extends RecyclerView.ViewHolder {
 
         // Recycler View Item Layout
-        AppCompatImageButton scanItemIcon;
+        AppCompatImageButton scanItemIcon, scanStatusIcon;
         TextView scanItemText;
 
-        public ScanAdapterViewHolder(@NonNull View itemView, RecyclerViewItemClickListener<ScanItem> listener, List<ScanItem> scanItems) {
+        public ScanAdapterViewHolder(@NonNull View itemView, Context context, RecyclerViewItemClickListener<ScanItem> listener, List<ScanItem> scanItems) {
             super(itemView);
             this.scanItemIcon = itemView.findViewById(R.id.IB_NewTicketItemButton);
             this.scanItemText = itemView.findViewById(R.id.TV_NewTicketItemText);
+            this.scanStatusIcon = itemView.findViewById(R.id.IB_NewTicketArrowItemButton);
 
             // OnClick listener
             itemView.setOnClickListener(view -> {
+                this.scanStatusIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check));
                 if (listener != null)
-                    listener.setOnRecyclerItemClick(getAdapterPosition(), scanItems);
+                    listener.setOnRecyclerItemClick(getAdapterPosition(), scanItems, this.scanStatusIcon);
             });
         }
+
+        public void bind(ScanItem scanItem) {
+            this.scanItemIcon.setImageResource(scanItem.getScanItemIcon());
+            this.scanItemText.setText(scanItem.getScanItemName());
+        }
+
     }
 }

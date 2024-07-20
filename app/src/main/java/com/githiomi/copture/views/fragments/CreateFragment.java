@@ -1,15 +1,23 @@
 package com.githiomi.copture.views.fragments;
 
-import android.content.ActivityNotFoundException;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,16 +37,18 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
 
     // Layouts
     Animations animations;
+    TextView errorText;
     LottieAnimationView scanAnimationView;
     RecyclerView createNewTicketRecyclerView;
-    AppCompatButton createNewTicketButton;
+    AppCompatButton submitTicketButton;
+
+    // Data
+    ActivityResultLauncher<String> image;
 
     public CreateFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static CreateFragment newInstance(String param1, String param2) {
+    public static CreateFragment newInstance() {
         return new CreateFragment();
     }
 
@@ -50,6 +60,14 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentCreateBinding fragmentCreateBinding = FragmentCreateBinding.inflate(inflater, container, false);
+
+        // Init activity
+        this.image = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                result -> {
+                    System.out.println("Gotten result -> " + result);
+                }
+        );
 
         // Init animations
         this.animations = new Animations(getContext());
@@ -63,22 +81,41 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         // setAdapter
         setAdapter();
 
+        // Listeners
+        this.submitTicketButton.setOnClickListener(view -> {
+            if (!this.submitTicketButton.isEnabled()) {
+                System.out.println("From disabled");
+                this.errorText.setVisibility(VISIBLE);
+                return;
+            }
+
+            if (this.submitTicketButton.isEnabled()) this.errorText.setVisibility(GONE);
+            Toast.makeText(getContext(), "Submitted Ticket", Toast.LENGTH_LONG).show();
+        });
+
         return fragmentCreateBinding.getRoot();
     }
 
     @Override
-    public void setOnRecyclerItemClick(int recyclerViewPosition, List<ScanItem> recyclerViewItems) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    public void setOnRecyclerItemClick(int recyclerViewPosition, List<ScanItem> recyclerViewItems, View itemView) {
+        Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
 
-        try {
-            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
-                startActivity(intent);
-            }
-            requireActivity().startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            System.out.println("Could not open camera");
-            Toast.makeText(getContext(), "Could not open camera", Toast.LENGTH_SHORT).show();
-        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, 101);
+
+        image.launch("image/*");
+
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//
+//        try {
+//            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
+//                startActivity(intent);
+//            }
+//            requireActivity().startActivity(intent);
+//        } catch (ActivityNotFoundException e) {
+//            System.out.println("Could not open camera");
+//            Toast.makeText(getContext(), "Could not open camera", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void setAdapter() {
@@ -90,11 +127,14 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
 
     private void inflateViews(FragmentCreateBinding root) {
         this.scanAnimationView = root.LAScanAnimation;
+        this.errorText = root.TVErrorRequiredFields;
+        this.submitTicketButton = root.CBCreateNewTicket;
         this.createNewTicketRecyclerView = root.RVCreateNewTicket;
     }
 
     private void attachAnimations() {
         this.scanAnimationView.setAnimation(this.animations.getFromTopAnimation());
+        this.submitTicketButton.setAnimation(this.animations.getFromRightAnimation());
         this.createNewTicketRecyclerView.setAnimation(this.animations.getFromBottomAnimation());
     }
 }

@@ -70,7 +70,7 @@ public class HotlineAdapter extends RecyclerView.Adapter<HotlineAdapter.HotlineV
             // OnClick listener
             itemView.setOnClickListener(view -> {
                 if (listener != null)
-                    listener.setOnRecyclerItemClick(getAdapterPosition(), hotlines);
+                    listener.setOnRecyclerItemClick(getAdapterPosition(), hotlines, itemView);
             });
         }
     }

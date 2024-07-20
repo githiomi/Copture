@@ -182,7 +182,7 @@ public class HotlineFragment extends Fragment implements RecyclerViewItemClickLi
      * @param hotlines             the hotlines in the respective recycler view
      */
     @Override
-    public void setOnRecyclerItemClick(int recyclerViewPosition, List<Hotline> hotlines) {
+    public void setOnRecyclerItemClick(int recyclerViewPosition, List<Hotline> hotlines, View itemView) {
 
         try {
             requireActivity().startActivity(
