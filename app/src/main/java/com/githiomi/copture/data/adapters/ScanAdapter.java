@@ -82,7 +82,7 @@ public class ScanAdapter extends RecyclerView.Adapter<ScanAdapter.ScanAdapterVie
 
             // OnClick listener
             itemView.setOnClickListener(view -> {
-                this.scanStatusIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check));
+//                this.scanStatusIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_check));
                 if (listener != null)
                     listener.setOnRecyclerItemClick(getAdapterPosition(), scanItems, this.scanStatusIcon);
             });

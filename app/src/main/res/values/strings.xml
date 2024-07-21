@@ -61,4 +61,9 @@
     <string name="citation_ticket">Citation Ticket</string>
     <string name="submit_ticket">Submit Ticket</string>
     <string name="err_required_fields_data_missing">*Required Fields Data Missing</string>
+    <string name="driver_license_scan">Driver\'s License Scan</string>
+    <string name="confirm">Confirm</string>
+    <string name="drivers_name_placeholder">Driver\'s Name</string>
+    <string name="license_number_placeholder">Driver\'s License Number</string>
+    <string name="diver_nationality_placeholder">Driver\'s Nationality</string>
 </resources>
