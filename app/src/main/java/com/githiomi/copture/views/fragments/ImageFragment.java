@@ -3,6 +3,8 @@ package com.githiomi.copture.views.fragments;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +34,6 @@ public class ImageFragment extends Fragment {
     // Data
     Animations animations;
 
-    private static final String ARG_IMAGE_BITMAP = "image_bitmap";
     private Bitmap imageBitmap;
 
     public ImageFragment() {
