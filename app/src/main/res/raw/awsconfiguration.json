@@ -1,0 +1,20 @@
+{
+  "Version": "1.0",
+  "CredentialsProvider": {
+    "CognitoIdentity": {
+      "Default": {
+        "PoolId": "us-east-1:4d2ce1f4-0427-409a-95e6-5466edac3b89",
+        "Region": "us-east-1"
+      }
+    }
+  },
+  "IdentityManager": {
+    "Default": {}
+  },
+  "S3TransferUtility": {
+    "Default": {
+      "Bucket": "danielgithiomi-s2110911-copture-honoursproject",
+      "Region": "us-east-1"
+    }
+  }
+}

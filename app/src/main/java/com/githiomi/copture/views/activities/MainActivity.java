@@ -10,6 +10,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.UserStateDetails;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
@@ -53,6 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Set animations
         attachAnimations();
+
+        // AWS Mobile Client Init
+        AWSMobileClient.getInstance().initialize(this, new Callback<UserStateDetails>() {
+            @Override
+            public void onResult(UserStateDetails result) {
+                System.out.println("Successfully initialized the AWS Mobile Client");
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println("Error: Could not initialized the AWS Mobile Client");
+            }
+        });
 
         // Attach views
         getSupportFragmentManager()

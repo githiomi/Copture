@@ -18,10 +18,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.githiomi.copture.databinding.FragmentImageBinding;
+import com.githiomi.copture.utils.AWS;
 import com.githiomi.copture.utils.Animations;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 public class ImageFragment extends Fragment {
@@ -33,7 +44,6 @@ public class ImageFragment extends Fragment {
 
     // Data
     Animations animations;
-
     private Bitmap imageBitmap;
 
     public ImageFragment() {
@@ -72,9 +82,62 @@ public class ImageFragment extends Fragment {
         // Set Image to preview
         setImage();
 
-        new Handler().postDelayed(this::toggleExtractedData, 3000);
+        // Upload image to S3
+        uploadImageToS3();
 
         return fragmentImageBinding.getRoot();
+    }
+
+    private void uploadImageToS3(){
+        String filename = "drivers_license.jpg";
+        File imageFile = bitmapToFile(imageBitmap, filename);
+
+        TransferUtility transferUtility = TransferUtility.builder()
+                .context(getContext())
+                .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                .s3Client(new AmazonS3Client(AWSMobileClient.getInstance()))
+                .build();
+
+        TransferObserver uploadObserver = transferUtility.upload(
+                AWS.S3_BUCKET_NAME + "/" + filename,
+                imageFile
+        );
+
+        uploadObserver.setTransferListener(new TransferListener() {
+            @Override
+            public void onStateChanged(int id, TransferState state) {
+                if (TransferState.COMPLETED == state) {
+                    Toast.makeText(getContext(), "Upload completed", Toast.LENGTH_SHORT).show();
+                    // Image successfully uploaded, trigger your Lambda function if needed
+                } else if (TransferState.FAILED == state) {
+                    Toast.makeText(getContext(), "Upload failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                // Progress notification if needed
+            }
+
+            @Override
+            public void onError(int id, Exception ex) {
+                // Error handling
+                System.out.println("Upload observer error -> " + ex.getLocalizedMessage());
+            }
+        });
+    }
+
+    private File bitmapToFile(Bitmap bitmap, String fileName) {
+        File filesDir = requireContext().getFilesDir();
+        File imageFile = new File(filesDir, fileName);
+
+        try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (IOException e) {
+            System.out.println("Error converting bitmap to file: " + e.getLocalizedMessage());
+        }
+
+        return imageFile;
     }
 
     private void setImage() {
