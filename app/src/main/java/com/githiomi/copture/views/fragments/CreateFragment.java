@@ -94,7 +94,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
                         assert extras != null;
                         Bitmap imageBitmap = (Bitmap) extras.get("data");
                         // Redirect to a new fragment and pass the image
-                        replaceFragment(imageBitmap);
+                        replaceFragment(imageBitmap, "38583672");
                     } else {
                         Toast.makeText(getContext(), "Image capture failed", Toast.LENGTH_SHORT).show();
                     }
@@ -129,19 +129,21 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         return fragmentCreateBinding.getRoot();
     }
 
-    private void replaceFragment(Bitmap imageBitmap) {
+    private void replaceFragment(Bitmap imageBitmap, String licenseString) {
+
+        Long licenseNumber = Long.parseLong(licenseString);
+
         new ImageFragment();
         requireActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.FL_mainActivityFragmentContainer, ImageFragment.newInstance(imageBitmap))
+                .replace(R.id.FL_mainActivityFragmentContainer, ImageFragment.newInstance(imageBitmap, licenseNumber))
                 .setReorderingAllowed(true)
                 .commit();
     }
 
     @Override
     public void setOnRecyclerItemClick(int recyclerViewPosition, List<ScanItem> recyclerViewItems, View itemView) {
-//        Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, 101);
@@ -154,21 +156,8 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
             }
         } catch (ActivityNotFoundException e) {
             System.out.println("Image Capture Error: " + e.getLocalizedMessage());
-            Toast.makeText(getContext(), "Could not open camera", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Could not open camera. Please enable and try again", Toast.LENGTH_SHORT).show();
         }
-
-
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        try {
-//            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
-//                startActivity(intent);
-//            }
-//            requireActivity().startActivity(intent);
-//        } catch (ActivityNotFoundException e) {
-//            System.out.println("Could not open camera");
-//            Toast.makeText(getContext(), "Could not open camera", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     private void setAdapter() {

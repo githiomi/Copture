@@ -2,8 +2,6 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.githiomi.copture.utils.AWS.COGNITO_IDENTITY_ID;
-import static com.githiomi.copture.utils.AWS.COGNITO_REGION;
 import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
 
 import android.graphics.Bitmap;
@@ -21,17 +19,13 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-import com.amazonaws.regions.Region;
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.githiomi.copture.databinding.FragmentImageBinding;
-import com.githiomi.copture.utils.AWS;
 import com.githiomi.copture.utils.Animations;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -46,21 +40,25 @@ public class ImageFragment extends Fragment {
     AppCompatImageView imagePreview;
     LinearLayout loadingLayout, extractedDataLayout;
     RelativeLayout retakeButton;
-    TextInputLayout driverName, licenseNumber, driverDob;
+    TextInputLayout driverName, driverLicenseNumber, driverDob;
     AppCompatButton confirmButton;
 
     // Data
+    public static final String S3_BUCKET_PATH = "drivers_licenses/";
     Animations animations;
     private Bitmap imageBitmap;
+    private Long licenseNumber;
+    private static final String ARG_LICENSE_NUMBER = "License Number";
 
     public ImageFragment() {
         // Required empty public constructor
     }
 
-    public static ImageFragment newInstance(Bitmap imageBitmap) {
+    public static ImageFragment newInstance(Bitmap imageBitmap, Long licenseNumber) {
         ImageFragment imageFragment = new ImageFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_IMAGE_BITMAP, imageBitmap);
+        args.putLong(ARG_LICENSE_NUMBER, licenseNumber);
         imageFragment.setArguments(args);
         return imageFragment;
     }
@@ -70,6 +68,7 @@ public class ImageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             imageBitmap = getArguments().getParcelable(ARG_IMAGE_BITMAP);
+            licenseNumber = getArguments().getLong(ARG_LICENSE_NUMBER);
         }
     }
 
@@ -96,8 +95,8 @@ public class ImageFragment extends Fragment {
     }
 
     private void uploadImageToS3() {
-        String filename = "drivers_license.jpg";
-        File imageFile = bitmapToFile(imageBitmap, filename);
+        String imageFilename = licenseNumber + "_driverslicense.jpg";
+        File imageFile = bitmapToFile(imageBitmap, imageFilename);
 
         TransferUtility transferUtility = TransferUtility.builder()
                 .context(getContext())
@@ -106,7 +105,7 @@ public class ImageFragment extends Fragment {
                 .build();
 
         TransferObserver uploadObserver = transferUtility.upload(
-                AWS.S3_BUCKET_NAME + "/" + filename,
+                S3_BUCKET_PATH + imageFilename,
                 imageFile
         );
 
@@ -163,10 +162,10 @@ public class ImageFragment extends Fragment {
 
         new Handler().postDelayed(() -> {
             Objects.requireNonNull(this.driverName.getEditText()).setText("Daniel Githiomi");
-            Objects.requireNonNull(this.licenseNumber.getEditText()).setText("38583672");
+            Objects.requireNonNull(this.driverLicenseNumber.getEditText()).setText("38583672");
             Objects.requireNonNull(this.driverDob.getEditText()).setText("27th August 2001");
 
-            if (getEditTextData(this.driverName) != null && getEditTextData(this.licenseNumber) != null && getEditTextData(this.driverDob) != null)
+            if (getEditTextData(this.driverName) != null && getEditTextData(this.driverLicenseNumber) != null && getEditTextData(this.driverDob) != null)
                 this.confirmButton.setEnabled(true);
 
         }, 2000);
@@ -182,7 +181,7 @@ public class ImageFragment extends Fragment {
         this.retakeButton = root.RLRetakeButton;
         this.extractedDataLayout = root.LLExtractedDataPreview;
         this.driverName = root.ILDriversName;
-        this.licenseNumber = root.ILLicenseNumber;
+        this.driverLicenseNumber = root.ILLicenseNumber;
         this.driverDob = root.ILDriversDateOfBirth;
         this.confirmButton = root.CBConfirmDataTicket;
     }
