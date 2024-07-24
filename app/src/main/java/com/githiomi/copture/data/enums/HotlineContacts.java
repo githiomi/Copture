@@ -15,7 +15,7 @@ public enum HotlineContacts {
     SOUTH(new Hotline("South Police Headquarters", 6277216L)),
     CENTRAL(new Hotline("Central Police Headquarters", 6765116L)),
     EAST(new Hotline("East Police Headquarters", 4130944L)),
-    WEST(new Hotline("East Police Headquarters", 4661764L)),
+    WEST(new Hotline("West Police Headquarters", 4661764L)),
 
     // Lawyers
     SUPREME(new Hotline("Mauritius Supreme Court", 3442L)),
