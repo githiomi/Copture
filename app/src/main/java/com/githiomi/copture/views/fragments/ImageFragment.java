@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
@@ -38,7 +40,9 @@ public class ImageFragment extends Fragment {
     // Layout
     AppCompatImageView imagePreview;
     LinearLayout loadingLayout, extractedDataLayout;
-    TextInputLayout driverName, licenseNumber;
+    RelativeLayout retakeButton;
+    TextInputLayout driverName, licenseNumber, driverDob;
+    AppCompatButton confirmButton;
 
     // Data
     Animations animations;
@@ -78,7 +82,7 @@ public class ImageFragment extends Fragment {
         attachAnimations();
 
         // Set Image to preview
-        setImage();
+        new Handler().postDelayed(this::toggleExtractedData, 3000);
 
         // Upload image to S3
         uploadImageToS3();
@@ -139,9 +143,12 @@ public class ImageFragment extends Fragment {
     }
 
     private void setImage() {
-        if (imageBitmap != null)
+        if (imageBitmap != null) {
             imagePreview.setImageBitmap(imageBitmap);
-        else
+
+            // Then upload image to S3
+            uploadImageToS3();
+        } else
             Toast.makeText(getContext(), "There was an error setting the image", Toast.LENGTH_LONG).show();
     }
 
@@ -151,19 +158,32 @@ public class ImageFragment extends Fragment {
 
         new Handler().postDelayed(() -> {
             Objects.requireNonNull(this.driverName.getEditText()).setText("Daniel Githiomi");
-            Objects.requireNonNull(this.licenseNumber.getEditText()).setText("ABC123");
+            Objects.requireNonNull(this.licenseNumber.getEditText()).setText("38583672");
+            Objects.requireNonNull(this.driverDob.getEditText()).setText("27th August 2001");
+
+            if (getEditTextData(this.driverName) != null && getEditTextData(this.licenseNumber) != null && getEditTextData(this.driverDob) != null)
+                this.confirmButton.setEnabled(true);
+
         }, 2000);
+    }
+
+    private String getEditTextData(TextInputLayout textInputLayout) {
+        return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString();
     }
 
     private void inflateViews(FragmentImageBinding root) {
         this.imagePreview = root.IVScanPreview;
         this.loadingLayout = root.LLLoadingLayout;
+        this.retakeButton = root.RLRetakeButton;
         this.extractedDataLayout = root.LLExtractedDataPreview;
         this.driverName = root.ILDriversName;
         this.licenseNumber = root.ILLicenseNumber;
+        this.driverDob = root.ILDriversDateOfBirth;
+        this.confirmButton = root.CBConfirmDataTicket;
     }
 
     private void attachAnimations() {
+        this.retakeButton.setAnimation(this.animations.getFromRightAnimation());
         this.extractedDataLayout.setAnimation(this.animations.getFromBottomAnimation());
     }
 }
