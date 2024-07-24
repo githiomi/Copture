@@ -10,12 +10,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,10 @@ import com.githiomi.copture.data.interfaces.RecyclerViewItemClickListener;
 import com.githiomi.copture.data.models.ScanItem;
 import com.githiomi.copture.databinding.FragmentCreateBinding;
 import com.githiomi.copture.utils.Animations;
+import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import lombok.NonNull;
@@ -48,9 +52,18 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     LottieAnimationView scanAnimationView;
     RecyclerView createNewTicketRecyclerView;
     AppCompatButton submitTicketButton;
+    TextInputLayout driversLicenseNumber, driversName;
+    MultiAutoCompleteTextView driversOffenses;
+    AutoCompleteTextView driversNationality;
 
     // Data
     ActivityResultLauncher<Intent> imageCaptureLauncher;
+    List<String> nationalities = new ArrayList<String>(
+            Arrays.asList("Mauritian", "Kenyan")
+    );
+    List<String> offenses = new ArrayList<String>(
+            Arrays.asList("Driving under the influence", "Over Speeding", "Phone while driving")
+    );
 
     public CreateFragment() {
     }
@@ -68,7 +81,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentCreateBinding fragmentCreateBinding = FragmentCreateBinding.inflate(inflater, container, false);
 
-        // Init activity
+        // Init capture Activity
         this.imageCaptureLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -95,8 +108,9 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         // Attach animations
         attachAnimations();
 
-        // setAdapter
+        // set Adapters
         setAdapter();
+        setDropDownAdapters();
 
         // Listeners
         this.submitTicketButton.setOnClickListener(view -> {
@@ -162,11 +176,21 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         this.createNewTicketRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    private void setDropDownAdapters() {
+        this.driversOffenses.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, this.offenses));
+        this.driversOffenses.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        this.driversNationality.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, this.nationalities));
+    }
+
     private void inflateViews(FragmentCreateBinding root) {
         this.scanAnimationView = root.LAScanAnimation;
         this.errorText = root.TVErrorRequiredFields;
         this.submitTicketButton = root.CBCreateNewTicket;
         this.createNewTicketRecyclerView = root.RVCreateNewTicket;
+        this.driversLicenseNumber = root.ILLicenseNumber;
+        this.driversName = root.ILDriversName;
+        this.driversOffenses = root.MACTVOffences;
+        this.driversNationality = root.MACTVNationality;
     }
 
     private void attachAnimations() {

@@ -213,7 +213,7 @@
                         app:startIconTint="@color/green">
 
                         <MultiAutoCompleteTextView
-                            android:id="@+id/ACTV_Offences"
+                            android:id="@+id/MACTV_Offences"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="?customInputFieldBackground"
@@ -227,34 +227,31 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/IL_DriversNationality"
-                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="5dp"
+                        android:layout_marginVertical="15dp"
                         android:background="@drawable/edit_text_custom_background"
                         android:hint="@string/diver_nationality_placeholder"
                         android:textColorHint="?customInputFieldHintColor"
                         app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                        app:endIconMode="clear_text"
                         app:endIconTint="@color/green"
                         app:errorIconTint="?customInputFieldErrorColor"
                         app:errorTextColor="?customInputFieldErrorColor"
                         app:hintAnimationEnabled="true"
-                        app:startIconDrawable="@drawable/ic_globe"
+                        app:startIconDrawable="@drawable/ic_error"
                         app:startIconTint="@color/green">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <AutoCompleteTextView
+                            android:id="@+id/MACTV_Nationality"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content"
                             android:background="?customInputFieldBackground"
-                            android:fontFamily="@font/koho_semibold"
+                            android:completionHint="1"
+                            android:fontFamily="?semiBoldFont"
                             android:inputType="text"
-                            android:singleLine="true"
-                            android:textColor="?customInputFieldInputColor"
-                            android:textCursorDrawable="@color/primaryColor_700"
-                            android:textSize="17sp" />
+                            android:textColor="?mainTextColor" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
