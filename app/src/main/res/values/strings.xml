@@ -66,4 +66,6 @@
     <string name="drivers_name_placeholder">Driver\'s Name</string>
     <string name="license_number_placeholder">Driver\'s License Number</string>
     <string name="diver_nationality_placeholder">Driver\'s Nationality</string>
+    <string name="driver_preliminary_data">Driver Preliminary Data</string>
+    <string name="driver_offense">Driver\'s Offense</string>
 </resources>

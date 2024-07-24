@@ -99,6 +99,169 @@
                 android:textSize="12sp"
                 android:visibility="gone" />
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/authentication_form_card"
+                app:cardCornerRadius="?customCardCornerRadius"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/TV_PreliminaryDataHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:fontFamily="?attr/semiBoldFont"
+                        android:text="@string/driver_preliminary_data"
+                        android:textAllCaps="true"
+                        android:textColor="?mainTextColor"
+                        android:textSize="17sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_licenseNumber"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="15dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/license_number_placeholder"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_card"
+                        app:startIconTint="@color/green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:background="?customInputFieldBackground"
+                            android:fontFamily="@font/koho_semibold"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColor="?customInputFieldInputColor"
+                            android:textCursorDrawable="@color/primaryColor_700"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_DriversName"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/drivers_name_placeholder"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:cursorColor="@color/green"
+                        app:cursorErrorColor="@color/errorColor_900"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_profile_filled"
+                        app:startIconTint="@color/green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="?customInputFieldBackground"
+                            android:fontFamily="@font/koho_semibold"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:textColor="?customInputFieldInputColor"
+                            android:textCursorDrawable="@color/primaryColor_700"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_OffenseDropDown"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="15dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/driver_offense"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_error"
+                        app:startIconTint="@color/green">
+
+                        <MultiAutoCompleteTextView
+                            android:id="@+id/ACTV_Offences"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?customInputFieldBackground"
+                            android:completionHint="1"
+                            android:fontFamily="?semiBoldFont"
+                            android:hint="@string/driver_offense"
+                            android:inputType="text"
+                            android:textColor="?mainTextColor" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_DriversNationality"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/diver_nationality_placeholder"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_globe"
+                        app:startIconTint="@color/green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:background="?customInputFieldBackground"
+                            android:fontFamily="@font/koho_semibold"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:textColor="?customInputFieldInputColor"
+                            android:textCursorDrawable="@color/primaryColor_700"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RV_CreateNewTicket"
                 android:layout_width="match_parent"
