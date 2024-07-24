@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.circleimageview)
     implementation(libs.projectlombok.lombok)
     implementation(libs.awssdkcore)
+    implementation(libs.awssdkcognito)
+    implementation(libs.awssdkddb)
     implementation(libs.awssdks3)
     implementation(libs.awsmobileclient)
     testImplementation(libs.junit)

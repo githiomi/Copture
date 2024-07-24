@@ -3,7 +3,7 @@
   "CredentialsProvider": {
     "CognitoIdentity": {
       "Default": {
-        "PoolId": "us-east-1:4d2ce1f4-0427-409a-95e6-5466edac3b89",
+        "PoolId": "us-east-1:f74b3662-08b7-4ab1-9252-8cc68875dea7",
         "Region": "us-east-1"
       }
     }
@@ -13,7 +13,7 @@
   },
   "S3TransferUtility": {
     "Default": {
-      "Bucket": "danielgithiomi-s2110911-copture-honoursproject",
+      "Bucket": "honoursproject-s3bucket",
       "Region": "us-east-1"
     }
   }

@@ -12,6 +12,8 @@ lottie = "6.4.1"
 lombokVersion = "1.18.30"
 aws-sdk-core = "2.76.0"
 aws-s3-core = "2.76.0"
+aws-s3-cognito = "2.20.1"
+aws-s3-ddb = "2.76.0"
 aws-s3-mobile-client = "2.76.0"
 
 [libraries]
@@ -27,6 +29,8 @@ lottie = {group = "com.airbnb.android", name = "lottie", version.ref = "lottie"}
 projectlombok-lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombokVersion" }
 awssdkcore = { group = "com.amazonaws", name = "aws-android-sdk-core", version.ref = "aws-sdk-core" }
 awssdks3 = { group = "com.amazonaws", name = "aws-android-sdk-s3", version.ref = "aws-s3-core" }
+awssdkcognito = { group = "com.amazonaws", name = "aws-android-sdk-cognito", version.ref = "aws-s3-cognito" }
+awssdkddb = { group = "com.amazonaws", name = "aws-android-sdk-ddb", version.ref = "aws-s3-ddb" }
 awsmobileclient = { group = "com.amazonaws", name = "aws-android-sdk-mobile-client", version.ref = "aws-s3-mobile-client"}
 
 [plugins]

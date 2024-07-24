@@ -2,6 +2,8 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.githiomi.copture.utils.AWS.COGNITO_IDENTITY_ID;
+import static com.githiomi.copture.utils.AWS.COGNITO_REGION;
 import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
 
 import android.graphics.Bitmap;
@@ -19,11 +21,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.amazonaws.regions.Region;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.githiomi.copture.databinding.FragmentImageBinding;
 import com.githiomi.copture.utils.AWS;
@@ -81,11 +86,11 @@ public class ImageFragment extends Fragment {
         // attach animations
         attachAnimations();
 
+        // Set the image in preview
+        setImage();
+
         // Set Image to preview
         new Handler().postDelayed(this::toggleExtractedData, 3000);
-
-        // Upload image to S3
-        uploadImageToS3();
 
         return fragmentImageBinding.getRoot();
     }

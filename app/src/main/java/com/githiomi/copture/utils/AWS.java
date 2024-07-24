@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AWS {
 
-    public static final String COGNITO_IDENTITY_ID = "us-east-1:4d2ce1f4-0427-409a-95e6-5466edac3b89";
+    public static final String COGNITO_IDENTITY_ID = "us-east-1:f74b3662-08b7-4ab1-9252-8cc68875dea7";
     public static final Regions COGNITO_REGION = Regions.US_EAST_1;
     public static final String S3_BUCKET_NAME = "danielgithiomi-s2110911-copture-honoursproject";
 
