@@ -44,7 +44,7 @@ public class ImageFragment extends Fragment {
     AppCompatButton confirmButton;
 
     // Data
-    public static final String S3_BUCKET_PATH = "drivers_licenses/";
+    public static final String S3_BUCKET_PATH = "drivers-licenses/";
     Animations animations;
     private Bitmap imageBitmap;
     private Long licenseNumber;
