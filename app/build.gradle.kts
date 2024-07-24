@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.awssdkddb)
     implementation(libs.awssdks3)
     implementation(libs.awsmobileclient)
+    implementation(libs.retrofit)
+    implementation(libs.convertorgson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

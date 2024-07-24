@@ -9,11 +9,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.client.Callback;
-import com.amazonaws.mobile.client.UserStateDetails;
 import com.githiomi.copture.R;
+import com.githiomi.copture.data.interfaces.ApiService;
+import com.githiomi.copture.data.models.Offence;
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
 import com.githiomi.copture.views.fragments.CreateFragment;
@@ -25,6 +23,14 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
     // Layout
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FloatingActionButton createFab;
     Animations animations;
+
+    // Data
+    ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +66,14 @@ public class MainActivity extends AppCompatActivity {
         // Set animations
         attachAnimations();
 
-        // AWS Mobile Client Init
-        AWSMobileClient.getInstance().initialize(this, new Callback<UserStateDetails>() {
-            @Override
-            public void onResult(UserStateDetails result) {
-                System.out.println("Successfully initialized the AWS Mobile Client");
-            }
+        // Get data from AWS DynamoDB
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://5pxwfv65c6.execute-api.us-east-1.amazonaws.com/production/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-            @Override
-            public void onError(Exception e) {
-                System.out.println("Error: Could not initialized the AWS Mobile Client");
-            }
-        });
+        apiService = retrofit.create(ApiService.class);
+        getDynamoDBData();
 
         // Attach views
         getSupportFragmentManager()
@@ -96,6 +101,33 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private void getDynamoDBData(){
+
+        System.out.println("Getting Data");
+
+        Call<List<Offence>> call = this.apiService.getOffences();
+        call.enqueue(new Callback<List<Offence>>() {
+            @Override
+            public void onResponse(Call<List<Offence>> call, Response<List<Offence>> response) {
+                System.out.println(response);
+                if (response.isSuccessful()) {
+                    List<Offence> offences = response.body();
+                    System.out.println("Offences -> " + offences);
+                } else {
+                    // Handle the error
+                    System.out.println("Error finding offences! " + response.message() + " Call -> " + call);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Offence>> call, Throwable t) {
+                // Handle failure
+                System.out.println("error completely -> " + t.getLocalizedMessage());
+            }
+        });
+
     }
 
     private void replaceFragment(Fragment fragment) {

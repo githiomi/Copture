@@ -1,5 +1,6 @@
 package com.githiomi.copture.data.models;
 
+
 import com.githiomi.copture.data.enums.SeverityLevel;
 
 public class Offence {
