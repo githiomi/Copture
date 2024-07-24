@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -52,6 +53,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     LottieAnimationView scanAnimationView;
     RecyclerView createNewTicketRecyclerView;
     AppCompatButton submitTicketButton;
+    CardView preliminaryData;
     TextInputLayout driversLicenseNumber, driversName;
     MultiAutoCompleteTextView driversOffenses;
     AutoCompleteTextView driversNationality;
@@ -186,6 +188,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         this.scanAnimationView = root.LAScanAnimation;
         this.errorText = root.TVErrorRequiredFields;
         this.submitTicketButton = root.CBCreateNewTicket;
+        this.preliminaryData = root.CVDriverPreliminaryData;
         this.createNewTicketRecyclerView = root.RVCreateNewTicket;
         this.driversLicenseNumber = root.ILLicenseNumber;
         this.driversName = root.ILDriversName;
@@ -196,6 +199,6 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     private void attachAnimations() {
         this.scanAnimationView.setAnimation(this.animations.getFromTopAnimation());
         this.submitTicketButton.setAnimation(this.animations.getFromRightAnimation());
-        this.createNewTicketRecyclerView.setAnimation(this.animations.getFromBottomAnimation());
+        this.preliminaryData.setAnimation(this.animations.getFromBottomAnimation());
     }
 }

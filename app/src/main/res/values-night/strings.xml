@@ -68,4 +68,8 @@
     <string name="diver_nationality_placeholder">Driver\'s Nationality</string>
     <string name="driver_preliminary_data">Driver Preliminary Data</string>
     <string name="driver_offense">Driver\'s Offense</string>
+    <string name="cd_error_icon">warning icon</string>
+    <string name="are_you_sure">Are You Sure?</string>
+    <string name="loosing_data">Going back will mean you lose all collected information!</string>
+    <string name="cancel">Cancel</string>
 </resources>

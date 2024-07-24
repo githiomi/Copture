@@ -2,7 +2,6 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-
 import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
 
 import android.graphics.Bitmap;
@@ -30,7 +29,6 @@ import com.githiomi.copture.utils.Animations;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
@@ -88,7 +86,7 @@ public class ImageFragment extends Fragment {
         return fragmentImageBinding.getRoot();
     }
 
-    private void uploadImageToS3(){
+    private void uploadImageToS3() {
         String filename = "drivers_license.jpg";
         File imageFile = bitmapToFile(imageBitmap, filename);
 
