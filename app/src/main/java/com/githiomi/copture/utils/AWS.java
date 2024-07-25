@@ -14,6 +14,9 @@ public class AWS {
     public static final String S3_BUCKET_NAME = "honoursproject-s3bucket";
     public static final String S3_BUCKET_URL = "https://" + S3_BUCKET_NAME + ".s3.us-east-1.amazonaws.com";
 
+    // Bucket Paths
+    public static final String DRIVERS_LICENSES_S3_BUCKET_PATH = "drivers-licenses/";
+
     public static final List<String> S3_BUCKET_FOLDER_PATHS = new ArrayList<>(
             Arrays.asList(
                     FolderPaths.LICENSE.getFolderName(),

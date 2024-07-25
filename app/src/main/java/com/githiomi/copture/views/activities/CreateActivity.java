@@ -1,6 +1,7 @@
 package com.githiomi.copture.views.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -10,6 +11,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.UserStateDetails;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.ActivityCreateBinding;
 import com.githiomi.copture.utils.Animations;
@@ -45,12 +49,26 @@ public class CreateActivity extends AppCompatActivity {
         // Inflate views
         inflateViews(activityCreateBinding);
 
+        // Init AWS Mobile Client
+        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
+            @Override
+            public void onResult(UserStateDetails userStateDetails) {
+                System.out.println("AWS Mobile Client created successfully");
+                Log.i("INIT", "onResult: " + userStateDetails.getUserState());
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println("Error creating AWS Mobile Client");
+                Log.e("INIT", "Initialization error.", e);
+            }
+        });
+
         // Set default fragment
         replaceFragmentContainer(new CreateFragment());
-
     }
 
-    private void replaceFragmentContainer(Fragment fragment){
+    private void replaceFragmentContainer(Fragment fragment) {
         this.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.FL_createActivityFragmentContainer, fragment)

@@ -2,7 +2,11 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.githiomi.copture.utils.AWS.DRIVERS_LICENSES_S3_BUCKET_PATH;
+import static com.githiomi.copture.utils.AWS.S3_BUCKET_NAME;
 import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
+import static com.githiomi.copture.utils.Constants.ARG_LICENSE_NUMBER;
+import static com.githiomi.copture.utils.AWS.DRIVERS_LICENSES_S3_BUCKET_PATH;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -44,21 +48,19 @@ public class ImageFragment extends Fragment {
     AppCompatButton confirmButton;
 
     // Data
-    public static final String S3_BUCKET_PATH = "drivers-licenses/";
     Animations animations;
     private Bitmap imageBitmap;
-    private Long licenseNumber;
-    private static final String ARG_LICENSE_NUMBER = "License Number";
+    private String licenseNumber;
 
     public ImageFragment() {
         // Required empty public constructor
     }
 
-    public static ImageFragment newInstance(Bitmap imageBitmap, Long licenseNumber) {
+    public static ImageFragment newInstance(Bitmap imageBitmap, String licenseNumber) {
         ImageFragment imageFragment = new ImageFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_IMAGE_BITMAP, imageBitmap);
-        args.putLong(ARG_LICENSE_NUMBER, licenseNumber);
+        args.putString(ARG_LICENSE_NUMBER, licenseNumber);
         imageFragment.setArguments(args);
         return imageFragment;
     }
@@ -68,7 +70,7 @@ public class ImageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             imageBitmap = getArguments().getParcelable(ARG_IMAGE_BITMAP);
-            licenseNumber = getArguments().getLong(ARG_LICENSE_NUMBER);
+            licenseNumber = getArguments().getString(ARG_LICENSE_NUMBER);
         }
     }
 
@@ -99,13 +101,14 @@ public class ImageFragment extends Fragment {
         File imageFile = bitmapToFile(imageBitmap, imageFilename);
 
         TransferUtility transferUtility = TransferUtility.builder()
-                .context(getContext())
+                .context(requireContext())
                 .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
                 .s3Client(new AmazonS3Client(AWSMobileClient.getInstance()))
+                .defaultBucket(S3_BUCKET_NAME)
                 .build();
 
         TransferObserver uploadObserver = transferUtility.upload(
-                S3_BUCKET_PATH + imageFilename,
+                DRIVERS_LICENSES_S3_BUCKET_PATH + imageFilename,
                 imageFile
         );
 
@@ -114,7 +117,6 @@ public class ImageFragment extends Fragment {
             public void onStateChanged(int id, TransferState state) {
                 if (TransferState.COMPLETED == state) {
                     Toast.makeText(getContext(), "Upload completed", Toast.LENGTH_SHORT).show();
-                    // Image successfully uploaded, trigger your Lambda function if needed
                 } else if (TransferState.FAILED == state) {
                     Toast.makeText(getContext(), "Upload failed", Toast.LENGTH_SHORT).show();
                 }

@@ -2,6 +2,7 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static android.widget.Toast.LENGTH_LONG;
 import static com.githiomi.copture.utils.Constants.NATIONALITIES;
 
 import android.Manifest;
@@ -43,6 +44,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.NonNull;
 
@@ -60,6 +62,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
     AutoCompleteTextView driversNationality;
 
     // Data
+    String capturedLicenseNumber = "";
     ActivityResultLauncher<Intent> imageCaptureLauncher;
     List<String> nationalities = new ArrayList<String>(NATIONALITIES);
     List<String> offenses = new ArrayList<String>(
@@ -93,7 +96,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
                         assert extras != null;
                         Bitmap imageBitmap = (Bitmap) extras.get("data");
                         // Redirect to a new fragment and pass the image
-                        replaceFragment(imageBitmap, "38583672");
+                        replaceFragment(imageBitmap);
                     } else {
                         Toast.makeText(getContext(), "Image capture failed", Toast.LENGTH_SHORT).show();
                     }
@@ -122,27 +125,38 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
             }
 
             if (this.submitTicketButton.isEnabled()) this.errorText.setVisibility(GONE);
-            Toast.makeText(getContext(), "Submitted Ticket", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Submitted Ticket", LENGTH_LONG).show();
         });
 
         return fragmentCreateBinding.getRoot();
     }
 
-    private void replaceFragment(Bitmap imageBitmap, String licenseString) {
-
-        Long licenseNumber = Long.parseLong(licenseString);
-
-        new ImageFragment();
+    private void replaceFragment(Bitmap imageBitmap) {
         requireActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.FL_mainActivityFragmentContainer, ImageFragment.newInstance(imageBitmap, licenseNumber))
+                .replace(R.id.FL_createActivityFragmentContainer, ImageFragment.newInstance(imageBitmap, capturedLicenseNumber))
                 .setReorderingAllowed(true)
                 .commit();
     }
 
     @Override
     public void setOnRecyclerItemClick(int recyclerViewPosition, List<ScanItem> recyclerViewItems, View itemView) {
+
+        // Get the driver's license number
+        if (capturedLicenseNumber.isEmpty()) {
+            this.capturedLicenseNumber = Objects.requireNonNull(this.driversLicenseNumber.getEditText()).getText().toString().toLowerCase();
+
+            // Check for valid license number
+            if (!isLicenceNumberValid(capturedLicenseNumber)) {
+                Toast.makeText(requireContext(), "Please enter a valid license number!", LENGTH_LONG).show();
+
+                // Set Input Field Error
+                this.driversLicenseNumber.setErrorEnabled(true);
+                this.driversLicenseNumber.setError("Not a valid license number");
+                return;
+            }
+        }
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, 101);
@@ -157,6 +171,10 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
             System.out.println("Image Capture Error: " + e.getLocalizedMessage());
             Toast.makeText(getContext(), "Could not open camera. Please enable and try again", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean isLicenceNumberValid(String licenseNumber) {
+        return licenseNumber.length() > 6;
     }
 
     private void setAdapter() {

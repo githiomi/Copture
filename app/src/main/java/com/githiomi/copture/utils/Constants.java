@@ -8,8 +8,11 @@ import java.util.List;
 
 public class Constants {
 
+    // Create activity and fragments
     public static final String ARG_IMAGE_BITMAP = "image_bitmap";
+    public static final String ARG_LICENSE_NUMBER = "License Number";
 
+    // Constant Data
     public static final List<String> NATIONALITIES = new ArrayList<String>(
             Arrays.asList(
                     Nationality.NIGERIAN.getNationality(),
