@@ -160,40 +160,40 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/IL_DriversName"
-                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="5dp"
-                        android:background="@drawable/edit_text_custom_background"
-                        android:hint="@string/drivers_name_placeholder"
-                        android:textColorHint="?customInputFieldHintColor"
-                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                        app:cursorColor="@color/green"
-                        app:cursorErrorColor="@color/errorColor_900"
-                        app:endIconMode="clear_text"
-                        app:endIconTint="@color/green"
-                        app:errorIconTint="?customInputFieldErrorColor"
-                        app:errorTextColor="?customInputFieldErrorColor"
-                        app:hintAnimationEnabled="true"
-                        app:startIconDrawable="@drawable/ic_profile_filled"
-                        app:startIconTint="@color/green">
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:id="@+id/IL_DriversName"-->
+<!--                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginVertical="5dp"-->
+<!--                        android:background="@drawable/edit_text_custom_background"-->
+<!--                        android:hint="@string/drivers_name_placeholder"-->
+<!--                        android:textColorHint="?customInputFieldHintColor"-->
+<!--                        app:boxStrokeErrorColor="?customInputFieldErrorColor"-->
+<!--                        app:cursorColor="@color/green"-->
+<!--                        app:cursorErrorColor="@color/errorColor_900"-->
+<!--                        app:endIconMode="clear_text"-->
+<!--                        app:endIconTint="@color/green"-->
+<!--                        app:errorIconTint="?customInputFieldErrorColor"-->
+<!--                        app:errorTextColor="?customInputFieldErrorColor"-->
+<!--                        app:hintAnimationEnabled="true"-->
+<!--                        app:startIconDrawable="@drawable/ic_profile_filled"-->
+<!--                        app:startIconTint="@color/green">-->
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="?customInputFieldBackground"
-                            android:fontFamily="@font/koho_semibold"
-                            android:inputType="text"
-                            android:singleLine="true"
-                            android:textColor="?customInputFieldInputColor"
-                            android:textCursorDrawable="@color/primaryColor_700"
-                            android:textSize="17sp" />
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:background="?customInputFieldBackground"-->
+<!--                            android:fontFamily="@font/koho_semibold"-->
+<!--                            android:inputType="text"-->
+<!--                            android:singleLine="true"-->
+<!--                            android:textColor="?customInputFieldInputColor"-->
+<!--                            android:textCursorDrawable="@color/primaryColor_700"-->
+<!--                            android:textSize="17sp" />-->
 
-                    </com.google.android.material.textfield.TextInputLayout>
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/IL_OffenseDropDown"

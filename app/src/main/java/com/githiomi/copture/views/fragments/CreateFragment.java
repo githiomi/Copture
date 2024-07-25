@@ -2,7 +2,6 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-
 import static com.githiomi.copture.utils.Constants.NATIONALITIES;
 
 import android.Manifest;
@@ -35,12 +34,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.githiomi.copture.R;
 import com.githiomi.copture.data.adapters.ScanAdapter;
-import com.githiomi.copture.data.enums.Nationality;
 import com.githiomi.copture.data.interfaces.RecyclerViewItemClickListener;
 import com.githiomi.copture.data.models.ScanItem;
 import com.githiomi.copture.databinding.FragmentCreateBinding;
 import com.githiomi.copture.utils.Animations;
-import com.githiomi.copture.utils.Constants;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -182,7 +179,6 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         this.preliminaryData = root.CVDriverPreliminaryData;
         this.createNewTicketRecyclerView = root.RVCreateNewTicket;
         this.driversLicenseNumber = root.ILLicenseNumber;
-        this.driversName = root.ILDriversName;
         this.driversOffenses = root.MACTVOffences;
         this.driversNationality = root.MACTVNationality;
     }
