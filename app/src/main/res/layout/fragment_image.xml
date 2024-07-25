@@ -1,303 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginVertical="10dp"
     android:background="@color/transparent"
+    android:paddingHorizontal="10dp"
     tools:context=".views.fragments.ImageFragment">
 
-    <RelativeLayout
-        android:id="@+id/RL_Toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/transparent"
-        android:paddingVertical="5dp">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/IB_BackArrow"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:background="@color/transparent"
-            android:contentDescription="@string/cd_back_arrow"
-            android:src="@drawable/ic_arrow_left"
-            android:tint="?mainTextColor"
-            android:tooltipText="Back" />
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/RL_Toolbar"
-        android:layout_marginVertical="15dp"
-        android:paddingHorizontal="15dp">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/TV_PageHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="?attr/boldFont"
+            android:text="@string/driver_license_scan"
+            android:textAllCaps="true"
+            android:textColor="?mainTextColor"
+            android:textSize="27sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginVertical="10dp"
+            app:cardBackgroundColor="@color/brightColor_300"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/green"
+            app:strokeWidth="2dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/IV_ScanPreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_picture" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/LL_LoadingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="30dp"
+            android:gravity="center"
             android:orientation="vertical">
 
+            <ProgressBar
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:indeterminate="true"
+                android:indeterminateBehavior="repeat"
+                android:indeterminateTint="@color/green" />
+
             <TextView
-                android:id="@+id/TV_PageHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="?semiBoldFont"
+                android:text="@string/loading_please_wait"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="?mainTextColor"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LL_ErrorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/RL_ErrorRetakeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_marginHorizontal="7dp"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/primary_button"
+                android:clickable="true"
+                android:paddingHorizontal="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/BTN_ErrorRetakeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@color/transparent"
+                    android:fontFamily="?boldFont"
+                    android:padding="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_retake" />
+
+            </RelativeLayout>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/LA_ErrorAnimation"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/not_found" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="?semiBoldFont"
+                android:text="@string/error_uploading_image"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="?mainTextColor"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LL_ExtractedDataPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/RL_RetakeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_marginHorizontal="7dp"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/primary_button"
+                android:clickable="true"
+                android:paddingHorizontal="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/BTN_RetakeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@color/transparent"
+                    android:fontFamily="?boldFont"
+                    android:padding="5dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_retake" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/TV_ExtractedDataHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:fontFamily="?attr/boldFont"
-                android:text="@string/driver_license_scan"
+                android:text="@string/preview_extracted_data"
                 android:textAllCaps="true"
                 android:textColor="?mainTextColor"
-                android:textSize="27sp" />
+                android:textSize="20sp" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginVertical="10dp"
-                app:cardBackgroundColor="@color/brightColor_300"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/green"
-                app:strokeWidth="2dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/IV_ScanPreview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile_picture" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <LinearLayout
-                android:id="@+id/LL_LoadingLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="30dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ProgressBar
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:indeterminate="true"
-                    android:indeterminateBehavior="repeat"
-                    android:indeterminateTint="@color/green" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="?semiBoldFont"
-                    android:text="@string/loading_please_wait"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textColor="?mainTextColor"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/LL_ExtractedDataPreview"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:layout_marginTop="5dp"
+                android:background="@drawable/authentication_form_card"
+                app:cardCornerRadius="?customCardCornerRadius"
+                app:cardElevation="5dp">
 
-                <RelativeLayout
-                    android:id="@+id/RL_RetakeButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_marginHorizontal="7dp"
-                    android:layout_marginVertical="15dp"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_DriversName"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/drivers_name_placeholder"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:cursorColor="@color/green"
+                        app:cursorErrorColor="@color/errorColor_900"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_profile_filled"
+                        app:startIconTint="@color/green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="?customInputFieldBackground"
+                            android:fontFamily="@font/koho_semibold"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:textColor="?customInputFieldInputColor"
+                            android:textCursorDrawable="@color/primaryColor_700"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_licenseNumber"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="15dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/license_number_placeholder"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_card"
+                        app:startIconTint="@color/green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:background="?customInputFieldBackground"
+                            android:fontFamily="@font/koho_semibold"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColor="?customInputFieldInputColor"
+                            android:textCursorDrawable="@color/primaryColor_700"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/IL_DriversDateOfBirth"
+                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/edit_text_custom_background"
+                        android:hint="@string/dob_placeholder"
+                        android:textColorHint="?customInputFieldHintColor"
+                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/green"
+                        app:errorIconTint="?customInputFieldErrorColor"
+                        app:errorTextColor="?customInputFieldErrorColor"
+                        app:hintAnimationEnabled="true"
+                        app:startIconDrawable="@drawable/ic_globe"
+                        app:startIconTint="@color/green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:background="?customInputFieldBackground"
+                            android:fontFamily="@font/koho_semibold"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:textColor="?customInputFieldInputColor"
+                            android:textCursorDrawable="@color/primaryColor_700"
+                            android:textSize="17sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/RL_ConfirmButton"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="7dp"
+                android:layout_marginVertical="15dp"
+                android:clickable="true"
+                android:paddingHorizontal="10dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/CB_ConfirmDataTicket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/primary_button"
                     android:clickable="true"
-                    android:paddingHorizontal="10dp">
+                    android:drawableEnd="@drawable/ic_check"
+                    android:drawableTint="?mainTextColor"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/confirm" />
 
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/BTN_RetakeButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:background="@color/transparent"
-                        android:fontFamily="?boldFont"
-                        android:padding="5dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_retake" />
+                <ProgressBar
+                    android:id="@+id/PB_ConfirmProgressBar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:indeterminateBehavior="repeat"
+                    android:indeterminateTint="?mainTextColor"
+                    android:visibility="gone" />
 
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/TV_ExtractedDataHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="5dp"
-                    android:fontFamily="?attr/boldFont"
-                    android:text="@string/preview_extracted_data"
-                    android:textAllCaps="true"
-                    android:textColor="?mainTextColor"
-                    android:textSize="20sp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/authentication_form_card"
-                    app:cardCornerRadius="?customCardCornerRadius"
-                    app:cardElevation="5dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/IL_DriversName"
-                            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginVertical="5dp"
-                            android:background="@drawable/edit_text_custom_background"
-                            android:hint="@string/drivers_name_placeholder"
-                            android:textColorHint="?customInputFieldHintColor"
-                            app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                            app:cursorColor="@color/green"
-                            app:cursorErrorColor="@color/errorColor_900"
-                            app:endIconMode="clear_text"
-                            app:endIconTint="@color/green"
-                            app:errorIconTint="?customInputFieldErrorColor"
-                            app:errorTextColor="?customInputFieldErrorColor"
-                            app:hintAnimationEnabled="true"
-                            app:startIconDrawable="@drawable/ic_profile_filled"
-                            app:startIconTint="@color/green">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="?customInputFieldBackground"
-                                android:fontFamily="@font/koho_semibold"
-                                android:inputType="text"
-                                android:singleLine="true"
-                                android:textColor="?customInputFieldInputColor"
-                                android:textCursorDrawable="@color/primaryColor_700"
-                                android:textSize="17sp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/IL_licenseNumber"
-                            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginVertical="15dp"
-                            android:hint="@string/license_number_placeholder"
-                            android:background="@drawable/edit_text_custom_background"
-                            android:textColorHint="?customInputFieldHintColor"
-                            app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                            app:endIconMode="clear_text"
-                            app:endIconTint="@color/green"
-                            app:errorIconTint="?customInputFieldErrorColor"
-                            app:errorTextColor="?customInputFieldErrorColor"
-                            app:hintAnimationEnabled="true"
-                            app:startIconDrawable="@drawable/ic_card"
-                            app:startIconTint="@color/green">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-                                android:background="?customInputFieldBackground"
-                                android:fontFamily="@font/koho_semibold"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:textColor="?customInputFieldInputColor"
-                                android:textCursorDrawable="@color/primaryColor_700"
-                                android:textSize="17sp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/IL_DriversDateOfBirth"
-                            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginVertical="5dp"
-                            android:hint="@string/dob_placeholder"
-                            android:textColorHint="?customInputFieldHintColor"
-                            android:background="@drawable/edit_text_custom_background"
-                            app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                            app:endIconMode="clear_text"
-                            app:endIconTint="@color/green"
-                            app:errorIconTint="?customInputFieldErrorColor"
-                            app:errorTextColor="?customInputFieldErrorColor"
-                            app:hintAnimationEnabled="true"
-                            app:startIconDrawable="@drawable/ic_globe"
-                            app:startIconTint="@color/green">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-                                android:background="?customInputFieldBackground"
-                                android:fontFamily="@font/koho_semibold"
-                                android:inputType="text"
-                                android:singleLine="true"
-                                android:textColor="?customInputFieldInputColor"
-                                android:textCursorDrawable="@color/primaryColor_700"
-                                android:textSize="17sp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <RelativeLayout
-                    android:id="@+id/RL_ConfirmButton"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="7dp"
-                    android:layout_marginVertical="15dp"
-                    android:clickable="true"
-                    android:paddingHorizontal="10dp">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/CB_ConfirmDataTicket"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/primary_button"
-                        android:clickable="true"
-                        android:drawableEnd="@drawable/ic_check"
-                        android:drawableTint="?mainTextColor"
-                        android:enabled="false"
-                        android:gravity="center"
-                        android:paddingHorizontal="10dp"
-                        android:text="@string/confirm" />
-
-                    <ProgressBar
-                        android:id="@+id/PB_ConfirmProgressBar"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"
-                        android:indeterminateBehavior="repeat"
-                        android:indeterminateTint="?mainTextColor"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

@@ -74,4 +74,6 @@
     <string name="cancel">Cancel</string>
     <string name="preview_extracted_data">Preview Extracted Data</string>
     <string name="dob_placeholder">Driver\'s Date Of Birth</string>
+    <string name="no_data_found">No Data Found. Please Try Again.</string>
+    <string name="error_uploading_image">Error Uploading Image. Please try Again!</string>
 </resources>

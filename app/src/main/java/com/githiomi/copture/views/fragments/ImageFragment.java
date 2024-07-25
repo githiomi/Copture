@@ -2,11 +2,12 @@ package com.githiomi.copture.views.fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.amazonaws.mobileconnectors.s3.transferutility.TransferState.COMPLETED;
+import static com.amazonaws.mobileconnectors.s3.transferutility.TransferState.FAILED;
 import static com.githiomi.copture.utils.AWS.DRIVERS_LICENSES_S3_BUCKET_PATH;
 import static com.githiomi.copture.utils.AWS.S3_BUCKET_NAME;
 import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
 import static com.githiomi.copture.utils.Constants.ARG_LICENSE_NUMBER;
-import static com.githiomi.copture.utils.AWS.DRIVERS_LICENSES_S3_BUCKET_PATH;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,11 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
@@ -42,8 +43,8 @@ public class ImageFragment extends Fragment {
 
     // Layout
     AppCompatImageView imagePreview;
-    LinearLayout loadingLayout, extractedDataLayout;
-    RelativeLayout retakeButton;
+    LinearLayout loadingLayout, errorLayout, extractedDataLayout;
+    AppCompatImageButton retakeButton, errorRetakeButton;
     TextInputLayout driverName, driverLicenseNumber, driverDob;
     AppCompatButton confirmButton;
 
@@ -88,10 +89,17 @@ public class ImageFragment extends Fragment {
         attachAnimations();
 
         // Set the image in preview
-        setImage();
+        setAndUploadImage();
 
-        // Set Image to preview
-        new Handler().postDelayed(this::toggleExtractedData, 3000);
+        // Click Listeners
+        this.retakeButton.setOnClickListener(view -> {
+            this.toggleLoadingState();
+            System.out.println("Clicked the retake button");
+        });
+        this.errorRetakeButton.setOnClickListener(view -> {
+            this.toggleLoadingState();
+            System.out.println("Clicked the error retake button");
+        });
 
         return fragmentImageBinding.getRoot();
     }
@@ -115,11 +123,11 @@ public class ImageFragment extends Fragment {
         uploadObserver.setTransferListener(new TransferListener() {
             @Override
             public void onStateChanged(int id, TransferState state) {
-                if (TransferState.COMPLETED == state) {
-                    Toast.makeText(getContext(), "Upload completed", Toast.LENGTH_SHORT).show();
-                } else if (TransferState.FAILED == state) {
-                    Toast.makeText(getContext(), "Upload failed", Toast.LENGTH_SHORT).show();
-                }
+                if (COMPLETED == state) {
+                    toggleSuccessState();
+                    Toast.makeText(getContext(), "Driver's License Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                } else if (FAILED == state)
+                    Toast.makeText(getContext(), "Driver's License Upload failed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -130,6 +138,7 @@ public class ImageFragment extends Fragment {
             @Override
             public void onError(int id, Exception ex) {
                 // Error handling
+                toggleErrorState();
                 System.out.println("Upload observer error -> " + ex.getLocalizedMessage());
             }
         });
@@ -148,29 +157,39 @@ public class ImageFragment extends Fragment {
         return imageFile;
     }
 
-    private void setImage() {
+    private void setAndUploadImage() {
         if (imageBitmap != null) {
             imagePreview.setImageBitmap(imageBitmap);
-
-            // Then upload image to S3
-            uploadImageToS3();
+            // Wait then upload image to S3
+            new Handler().postDelayed(this::uploadImageToS3, 2000);
         } else
             Toast.makeText(getContext(), "There was an error setting the image", Toast.LENGTH_LONG).show();
     }
 
-    private void toggleExtractedData() {
+    private void toggleSuccessState() {
         this.loadingLayout.setVisibility(GONE);
         this.extractedDataLayout.setVisibility(VISIBLE);
 
         new Handler().postDelayed(() -> {
             Objects.requireNonNull(this.driverName.getEditText()).setText("Daniel Githiomi");
-            Objects.requireNonNull(this.driverLicenseNumber.getEditText()).setText("38583672");
-            Objects.requireNonNull(this.driverDob.getEditText()).setText("27th August 2001");
+            Objects.requireNonNull(this.driverLicenseNumber.getEditText()).setText(licenseNumber);
+            Objects.requireNonNull(this.driverDob.getEditText()).setText("27.08.2001");
 
             if (getEditTextData(this.driverName) != null && getEditTextData(this.driverLicenseNumber) != null && getEditTextData(this.driverDob) != null)
                 this.confirmButton.setEnabled(true);
 
-        }, 2000);
+        }, 1000);
+    }
+
+    private void toggleErrorState() {
+        this.loadingLayout.setVisibility(GONE);
+        this.errorLayout.setVisibility(VISIBLE);
+    }
+
+    private void toggleLoadingState() {
+        this.errorLayout.setVisibility(GONE);
+        this.extractedDataLayout.setVisibility(GONE);
+        this.loadingLayout.setVisibility(VISIBLE);
     }
 
     private String getEditTextData(TextInputLayout textInputLayout) {
@@ -180,7 +199,9 @@ public class ImageFragment extends Fragment {
     private void inflateViews(FragmentImageBinding root) {
         this.imagePreview = root.IVScanPreview;
         this.loadingLayout = root.LLLoadingLayout;
-        this.retakeButton = root.RLRetakeButton;
+        this.retakeButton = root.BTNRetakeButton;
+        this.errorRetakeButton = root.BTNErrorRetakeButton;
+        this.errorLayout = root.LLErrorLayout;
         this.extractedDataLayout = root.LLExtractedDataPreview;
         this.driverName = root.ILDriversName;
         this.driverLicenseNumber = root.ILLicenseNumber;
