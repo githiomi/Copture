@@ -1,275 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
+    android:paddingHorizontal="10dp"
+    android:paddingTop="5dp"
     tools:context=".views.fragments.CreateFragment">
 
-    <RelativeLayout
-        android:id="@+id/RL_Toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/transparent"
-        android:paddingVertical="5dp">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/IB_ArrowLeft"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:background="@color/transparent"
-            android:contentDescription="@string/cd_back_arrow"
-            android:src="@drawable/ic_arrow_left"
-            android:tint="?mainTextColor"
-            android:tooltipText="Back" />
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/RL_Toolbar"
-        android:paddingHorizontal="15dp">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/TV_PageSubHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginVertical="5dp"
+            android:fontFamily="?attr/regularFont"
+            android:text="@string/create_a_new"
+            android:textAllCaps="true"
+            android:textColor="?mainTextColor"
+            android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/TV_PageSubHeader"
+        <TextView
+            android:id="@+id/TV_PageHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="?attr/boldFont"
+            android:text="@string/citation_ticket"
+            android:textAllCaps="true"
+            android:textColor="?mainTextColor"
+            android:textSize="27sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/LA_ScanAnimation"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/credentials" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/CB_CreateNewTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/primary_button"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_add"
+            android:drawablePadding="5dp"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="@string/submit_ticket" />
+
+        <TextView
+            android:id="@+id/TV_ErrorRequiredFields"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:text="@string/err_required_fields_data_missing"
+            android:textColor="@color/errorColor_900"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_DriverPreliminaryData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/authentication_form_card"
+            app:cardCornerRadius="?customCardCornerRadius"
+            app:cardElevation="5dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                android:fontFamily="?attr/regularFont"
-                android:text="@string/create_a_new"
-                android:textAllCaps="true"
-                android:textColor="?mainTextColor"
-                android:textSize="22sp" />
+                android:layout_margin="10dp"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            <TextView
-                android:id="@+id/TV_PageHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                android:fontFamily="?attr/boldFont"
-                android:text="@string/citation_ticket"
-                android:textAllCaps="true"
-                android:textColor="?mainTextColor"
-                android:textSize="27sp" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/LA_ScanAnimation"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_gravity="center"
-                android:layout_marginVertical="10dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/credentials" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/CB_CreateNewTicket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/primary_button"
-                android:clickable="true"
-                android:drawableStart="@drawable/ic_add"
-                android:drawablePadding="5dp"
-                android:enabled="false"
-                android:gravity="center"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:text="@string/submit_ticket" />
-
-            <TextView
-                android:id="@+id/TV_ErrorRequiredFields"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:text="@string/err_required_fields_data_missing"
-                android:textColor="@color/errorColor_900"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/CV_DriverPreliminaryData"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="15dp"
-                android:background="@drawable/authentication_form_card"
-                app:cardCornerRadius="?customCardCornerRadius"
-                app:cardElevation="10dp">
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/TV_PreliminaryDataHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:layout_margin="5dp"
+                    android:fontFamily="?attr/semiBoldFont"
+                    android:text="@string/driver_preliminary_data"
+                    android:textAllCaps="true"
+                    android:textColor="?mainTextColor"
+                    android:textSize="17sp" />
 
-                    <TextView
-                        android:id="@+id/TV_PreliminaryDataHeader"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_licenseNumber"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="15dp"
+                    android:background="@drawable/edit_text_custom_background"
+                    android:hint="@string/license_number_placeholder"
+                    android:textColorHint="?customInputFieldHintColor"
+                    app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/green"
+                    app:errorIconTint="?customInputFieldErrorColor"
+                    app:errorTextColor="?customInputFieldErrorColor"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/ic_card"
+                    app:startIconTint="@color/green">
+
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:fontFamily="?attr/semiBoldFont"
-                        android:text="@string/driver_preliminary_data"
-                        android:textAllCaps="true"
-                        android:textColor="?mainTextColor"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="?customInputFieldBackground"
+                        android:fontFamily="@font/koho_semibold"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="?customInputFieldInputColor"
+                        android:textCursorDrawable="@color/primaryColor_700"
                         android:textSize="17sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/IL_licenseNumber"
-                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--                    <com.google.android.material.textfield.TextInputLayout-->
+                <!--                        android:id="@+id/IL_DriversName"-->
+                <!--                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:layout_marginVertical="5dp"-->
+                <!--                        android:background="@drawable/edit_text_custom_background"-->
+                <!--                        android:hint="@string/drivers_name_placeholder"-->
+                <!--                        android:textColorHint="?customInputFieldHintColor"-->
+                <!--                        app:boxStrokeErrorColor="?customInputFieldErrorColor"-->
+                <!--                        app:cursorColor="@color/green"-->
+                <!--                        app:cursorErrorColor="@color/errorColor_900"-->
+                <!--                        app:endIconMode="clear_text"-->
+                <!--                        app:endIconTint="@color/green"-->
+                <!--                        app:errorIconTint="?customInputFieldErrorColor"-->
+                <!--                        app:errorTextColor="?customInputFieldErrorColor"-->
+                <!--                        app:hintAnimationEnabled="true"-->
+                <!--                        app:startIconDrawable="@drawable/ic_profile_filled"-->
+                <!--                        app:startIconTint="@color/green">-->
+
+                <!--                        <com.google.android.material.textfield.TextInputEditText-->
+                <!--                            android:layout_width="match_parent"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_gravity="center"-->
+                <!--                            android:background="?customInputFieldBackground"-->
+                <!--                            android:fontFamily="@font/koho_semibold"-->
+                <!--                            android:inputType="text"-->
+                <!--                            android:singleLine="true"-->
+                <!--                            android:textColor="?customInputFieldInputColor"-->
+                <!--                            android:textCursorDrawable="@color/primaryColor_700"-->
+                <!--                            android:textSize="17sp" />-->
+
+                <!--                    </com.google.android.material.textfield.TextInputLayout>-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_OffenseDropDown"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="15dp"
+                    android:background="@drawable/edit_text_custom_background"
+                    android:hint="@string/driver_offense"
+                    android:textColorHint="?customInputFieldHintColor"
+                    app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                    app:endIconTint="@color/green"
+                    app:errorIconTint="?customInputFieldErrorColor"
+                    app:errorTextColor="?customInputFieldErrorColor"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/ic_error"
+                    app:startIconTint="@color/green">
+
+                    <MultiAutoCompleteTextView
+                        android:id="@+id/MACTV_Offences"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="15dp"
-                        android:background="@drawable/edit_text_custom_background"
-                        android:hint="@string/license_number_placeholder"
-                        android:textColorHint="?customInputFieldHintColor"
-                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                        app:endIconMode="clear_text"
-                        app:endIconTint="@color/green"
-                        app:errorIconTint="?customInputFieldErrorColor"
-                        app:errorTextColor="?customInputFieldErrorColor"
-                        app:hintAnimationEnabled="true"
-                        app:startIconDrawable="@drawable/ic_card"
-                        app:startIconTint="@color/green">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:background="?customInputFieldBackground"
-                            android:fontFamily="@font/koho_semibold"
-                            android:inputType="number"
-                            android:singleLine="true"
-                            android:textColor="?customInputFieldInputColor"
-                            android:textCursorDrawable="@color/primaryColor_700"
-                            android:textSize="17sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        android:id="@+id/IL_DriversName"-->
-<!--                        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:layout_marginVertical="5dp"-->
-<!--                        android:background="@drawable/edit_text_custom_background"-->
-<!--                        android:hint="@string/drivers_name_placeholder"-->
-<!--                        android:textColorHint="?customInputFieldHintColor"-->
-<!--                        app:boxStrokeErrorColor="?customInputFieldErrorColor"-->
-<!--                        app:cursorColor="@color/green"-->
-<!--                        app:cursorErrorColor="@color/errorColor_900"-->
-<!--                        app:endIconMode="clear_text"-->
-<!--                        app:endIconTint="@color/green"-->
-<!--                        app:errorIconTint="?customInputFieldErrorColor"-->
-<!--                        app:errorTextColor="?customInputFieldErrorColor"-->
-<!--                        app:hintAnimationEnabled="true"-->
-<!--                        app:startIconDrawable="@drawable/ic_profile_filled"-->
-<!--                        app:startIconTint="@color/green">-->
-
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:background="?customInputFieldBackground"-->
-<!--                            android:fontFamily="@font/koho_semibold"-->
-<!--                            android:inputType="text"-->
-<!--                            android:singleLine="true"-->
-<!--                            android:textColor="?customInputFieldInputColor"-->
-<!--                            android:textCursorDrawable="@color/primaryColor_700"-->
-<!--                            android:textSize="17sp" />-->
-
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/IL_OffenseDropDown"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="15dp"
-                        android:background="@drawable/edit_text_custom_background"
+                        android:background="?customInputFieldBackground"
+                        android:completionHint="1"
+                        android:fontFamily="?semiBoldFont"
                         android:hint="@string/driver_offense"
-                        android:textColorHint="?customInputFieldHintColor"
-                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                        app:endIconTint="@color/green"
-                        app:errorIconTint="?customInputFieldErrorColor"
-                        app:errorTextColor="?customInputFieldErrorColor"
-                        app:hintAnimationEnabled="true"
-                        app:startIconDrawable="@drawable/ic_error"
-                        app:startIconTint="@color/green">
+                        android:inputType="text"
+                        android:textColor="?mainTextColor" />
 
-                        <MultiAutoCompleteTextView
-                            android:id="@+id/MACTV_Offences"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?customInputFieldBackground"
-                            android:completionHint="1"
-                            android:fontFamily="?semiBoldFont"
-                            android:hint="@string/driver_offense"
-                            android:inputType="text"
-                            android:textColor="?mainTextColor" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_DriversNationality"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="15dp"
+                    android:background="@drawable/edit_text_custom_background"
+                    android:hint="@string/diver_nationality_placeholder"
+                    android:textColorHint="?customInputFieldHintColor"
+                    app:boxStrokeErrorColor="?customInputFieldErrorColor"
+                    app:endIconTint="@color/green"
+                    app:errorIconTint="?customInputFieldErrorColor"
+                    app:errorTextColor="?customInputFieldErrorColor"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/ic_error"
+                    app:startIconTint="@color/green">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/IL_DriversNationality"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <AutoCompleteTextView
+                        android:id="@+id/MACTV_Nationality"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginVertical="15dp"
-                        android:background="@drawable/edit_text_custom_background"
-                        android:hint="@string/diver_nationality_placeholder"
-                        android:textColorHint="?customInputFieldHintColor"
-                        app:boxStrokeErrorColor="?customInputFieldErrorColor"
-                        app:endIconTint="@color/green"
-                        app:errorIconTint="?customInputFieldErrorColor"
-                        app:errorTextColor="?customInputFieldErrorColor"
-                        app:hintAnimationEnabled="true"
-                        app:startIconDrawable="@drawable/ic_error"
-                        app:startIconTint="@color/green">
+                        android:background="?customInputFieldBackground"
+                        android:completionHint="1"
+                        android:fontFamily="?semiBoldFont"
+                        android:inputType="text"
+                        android:textColor="?mainTextColor" />
 
-                        <AutoCompleteTextView
-                            android:id="@+id/MACTV_Nationality"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?customInputFieldBackground"
-                            android:completionHint="1"
-                            android:fontFamily="?semiBoldFont"
-                            android:inputType="text"
-                            android:textColor="?mainTextColor" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-                </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_CreateNewTicket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="10dp"
+            tools:itemCount="5"
+            tools:listitem="@layout/new_ticket_recycler_view_item" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RV_CreateNewTicket"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="10dp"
-                tools:itemCount="5"
-                tools:listitem="@layout/new_ticket_recycler_view_item" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </ScrollView>
-
-</RelativeLayout>
+</ScrollView>

@@ -3,13 +3,8 @@ package com.githiomi.copture.views.fragments;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +12,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.FragmentHomeBinding;
 import com.githiomi.copture.utils.Animations;
+import com.githiomi.copture.views.activities.CreateActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
 
@@ -69,12 +68,12 @@ public class HomeFragment extends Fragment {
         if (entries.isEmpty()) showNewEntryLayout();
 
         // Listeners
-        this.createNewTicketButton.setOnClickListener(view -> this.replaceFragment(new CreateFragment()));
+        this.createNewTicketButton.setOnClickListener(view -> requireActivity().startActivity(new Intent(requireContext(), CreateActivity.class)));
 
         return fragmentHomeBinding.getRoot();
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         requireActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
@@ -83,7 +82,7 @@ public class HomeFragment extends Fragment {
                 .commit();
     }
 
-    private void inflateViews(FragmentHomeBinding root){
+    private void inflateViews(FragmentHomeBinding root) {
         this.officerProfileInfo = root.RLOfficerInfo;
         this.loadingLayout = root.LLLoadingLayout;
         this.mainContent = root.RLMainContent;
@@ -92,7 +91,7 @@ public class HomeFragment extends Fragment {
         this.createNewTicketButton = root.BTNNewTicket;
     }
 
-    private void attachAnimations(){
+    private void attachAnimations() {
         this.officerProfileInfo.setAnimation(this.animations.getFromTopAnimation());
         this.mainContent.setAnimation(animations.getFromRightAnimation());
     }

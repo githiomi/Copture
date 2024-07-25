@@ -1,5 +1,8 @@
 package com.githiomi.copture.views.activities;
 
+import static com.githiomi.copture.R.id.FL_mainActivityFragmentContainer;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -78,11 +81,12 @@ public class MainActivity extends AppCompatActivity {
         // Attach views
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.FL_mainActivityFragmentContainer, new HomeFragment())
+                .replace(FL_mainActivityFragmentContainer, new HomeFragment())
                 .commit();
 
         //  Listeners
-        this.createFab.setOnClickListener(view -> replaceFragment(new CreateFragment()));
+        this.createFab.setOnClickListener(view -> startActivity(new Intent(this, CreateActivity.class)));
+
         this.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
@@ -90,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new HomeFragment());
             else if (itemId == R.id.bottom_history)
                 replaceFragment(new HistoryFragment());
-            else if (itemId == R.id.bottom_create)
-                return true;
             else if (itemId == R.id.bottom_call)
                 replaceFragment(new HotlineFragment());
             else if (itemId == R.id.bottom_profile)
@@ -123,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Offence>> call, Throwable t) {
-                // Handle failure
                 System.out.println("error completely -> " + t.getLocalizedMessage());
             }
         });
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.FL_mainActivityFragmentContainer, fragment)
+                .replace(FL_mainActivityFragmentContainer, fragment)
                 .setReorderingAllowed(true)
                 .commit();
     }
