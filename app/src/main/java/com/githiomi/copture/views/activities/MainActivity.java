@@ -17,7 +17,6 @@ import com.githiomi.copture.data.interfaces.ApiService;
 import com.githiomi.copture.data.models.Offence;
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
-import com.githiomi.copture.views.fragments.CreateFragment;
 import com.githiomi.copture.views.fragments.HistoryFragment;
 import com.githiomi.copture.views.fragments.HomeFragment;
 import com.githiomi.copture.views.fragments.HotlineFragment;

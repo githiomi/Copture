@@ -14,12 +14,14 @@ import androidx.fragment.app.Fragment;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.UserStateDetails;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferNetworkLossHandler;
 import com.githiomi.copture.R;
+import com.githiomi.copture.data.interfaces.ActivityDataPasser;
 import com.githiomi.copture.databinding.ActivityCreateBinding;
 import com.githiomi.copture.utils.Animations;
-import com.githiomi.copture.views.fragments.CreateFragment;
+import com.githiomi.copture.views.fragments.TicketFragment;
 
-public class CreateActivity extends AppCompatActivity {
+public class CreateActivity extends AppCompatActivity implements ActivityDataPasser {
 
     // Layouts
     FrameLayout createActivityFragmentContainer;
@@ -49,6 +51,8 @@ public class CreateActivity extends AppCompatActivity {
         // Inflate views
         inflateViews(activityCreateBinding);
 
+        TransferNetworkLossHandler.getInstance(getApplicationContext());
+
         // Init AWS Mobile Client
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
@@ -65,7 +69,15 @@ public class CreateActivity extends AppCompatActivity {
         });
 
         // Set default fragment
-        replaceFragmentContainer(new CreateFragment());
+        replaceFragmentContainer(new TicketFragment());
+    }
+
+    // Override interface method to pass data
+    @Override
+    public void passData(String data) {
+        // Handle data passed from fragments
+        System.out.println("FROM ACTIVITY: Original Data -> " + data );
+        System.out.println("FROM ACTIVITY: The data passed is -> " + data.toUpperCase() );
     }
 
     private void replaceFragmentContainer(Fragment fragment) {

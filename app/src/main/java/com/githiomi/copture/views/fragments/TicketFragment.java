@@ -37,7 +37,7 @@ import com.githiomi.copture.R;
 import com.githiomi.copture.data.adapters.ScanAdapter;
 import com.githiomi.copture.data.interfaces.RecyclerViewItemClickListener;
 import com.githiomi.copture.data.models.ScanItem;
-import com.githiomi.copture.databinding.FragmentCreateBinding;
+import com.githiomi.copture.databinding.FragmentTicketBinding;
 import com.githiomi.copture.utils.Animations;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -48,7 +48,7 @@ import java.util.Objects;
 
 import lombok.NonNull;
 
-public class CreateFragment extends Fragment implements RecyclerViewItemClickListener<ScanItem> {
+public class TicketFragment extends Fragment implements RecyclerViewItemClickListener<ScanItem> {
 
     // Layouts
     Animations animations;
@@ -69,11 +69,11 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
             Arrays.asList("Driving under the influence", "Over Speeding", "Phone while driving")
     );
 
-    public CreateFragment() {
+    public TicketFragment() {
     }
 
-    public static CreateFragment newInstance() {
-        return new CreateFragment();
+    public static TicketFragment newInstance() {
+        return new TicketFragment();
     }
 
     @Override
@@ -83,7 +83,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentCreateBinding fragmentCreateBinding = FragmentCreateBinding.inflate(inflater, container, false);
+        FragmentTicketBinding fragmentTicketBinding = FragmentTicketBinding.inflate(inflater, container, false);
 
         // Init capture Activity
         this.imageCaptureLauncher = registerForActivityResult(
@@ -107,7 +107,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         this.animations = new Animations(getContext());
 
         // Inflate views
-        inflateViews(fragmentCreateBinding);
+        inflateViews(fragmentTicketBinding);
 
         // Attach animations
         attachAnimations();
@@ -128,14 +128,14 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
             Toast.makeText(getContext(), "Submitted Ticket", LENGTH_LONG).show();
         });
 
-        return fragmentCreateBinding.getRoot();
+        return fragmentTicketBinding.getRoot();
     }
 
     private void replaceFragment(Bitmap imageBitmap) {
         requireActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.FL_createActivityFragmentContainer, ImageFragment.newInstance(imageBitmap, capturedLicenseNumber))
+                .replace(R.id.FL_createActivityFragmentContainer, LicenseFragment.newInstance(imageBitmap, capturedLicenseNumber))
                 .setReorderingAllowed(true)
                 .commit();
     }
@@ -190,7 +190,7 @@ public class CreateFragment extends Fragment implements RecyclerViewItemClickLis
         this.driversNationality.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, this.nationalities));
     }
 
-    private void inflateViews(FragmentCreateBinding root) {
+    private void inflateViews(FragmentTicketBinding root) {
         this.scanAnimationView = root.LAScanAnimation;
         this.errorText = root.TVErrorRequiredFields;
         this.submitTicketButton = root.CBCreateNewTicket;

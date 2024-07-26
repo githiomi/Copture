@@ -9,15 +9,21 @@ import static com.githiomi.copture.utils.AWS.S3_BUCKET_NAME;
 import static com.githiomi.copture.utils.Constants.ARG_IMAGE_BITMAP;
 import static com.githiomi.copture.utils.Constants.ARG_LICENSE_NUMBER;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -30,7 +36,9 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.githiomi.copture.databinding.FragmentImageBinding;
+import com.githiomi.copture.R;
+import com.githiomi.copture.data.interfaces.ActivityDataPasser;
+import com.githiomi.copture.databinding.FragmentLicenseBinding;
 import com.githiomi.copture.utils.Animations;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -39,7 +47,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ImageFragment extends Fragment {
+public class LicenseFragment extends Fragment {
 
     // Layout
     AppCompatImageView imagePreview;
@@ -51,19 +59,23 @@ public class ImageFragment extends Fragment {
     // Data
     Animations animations;
     private Bitmap imageBitmap;
-    private String licenseNumber;
+    private String licenseNumber, driverNames;
+    ActivityResultLauncher<Intent> imageCaptureIntent;
 
-    public ImageFragment() {
+    // Interfaces
+    ActivityDataPasser activityDataPasser;
+
+    public LicenseFragment() {
         // Required empty public constructor
     }
 
-    public static ImageFragment newInstance(Bitmap imageBitmap, String licenseNumber) {
-        ImageFragment imageFragment = new ImageFragment();
+    public static LicenseFragment newInstance(Bitmap imageBitmap, String licenseNumber) {
+        LicenseFragment licenseFragment = new LicenseFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_IMAGE_BITMAP, imageBitmap);
         args.putString(ARG_LICENSE_NUMBER, licenseNumber);
-        imageFragment.setArguments(args);
-        return imageFragment;
+        licenseFragment.setArguments(args);
+        return licenseFragment;
     }
 
     @Override
@@ -77,19 +89,40 @@ public class ImageFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentImageBinding fragmentImageBinding = FragmentImageBinding.inflate(inflater, container, false);
+        FragmentLicenseBinding fragmentLicenseBinding = FragmentLicenseBinding.inflate(inflater, container, false);
 
         // Init animations
         animations = new Animations(getContext());
 
         // Bind Views
-        inflateViews(fragmentImageBinding);
+        inflateViews(fragmentLicenseBinding);
 
         // attach animations
         attachAnimations();
 
         // Set the image in preview
         setAndUploadImage();
+
+        // set up data passer
+        this.activityDataPasser = (ActivityDataPasser) requireContext();
+
+        // Init activity for result intent
+        this.imageCaptureIntent = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // Handle the image result here
+                        assert result.getData() != null;
+                        Bundle extras = result.getData().getExtras();
+                        assert extras != null;
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        // Redirect to a new fragment and pass the image
+                        replaceFragment(imageBitmap);
+                    } else {
+                        Toast.makeText(getContext(), "Image recapture failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
 
         // Click Listeners
         this.retakeButton.setOnClickListener(view -> {
@@ -99,9 +132,54 @@ public class ImageFragment extends Fragment {
         this.errorRetakeButton.setOnClickListener(view -> {
             this.toggleLoadingState();
             System.out.println("Clicked the error retake button");
+
+            // redo the image capture and upload process
+            retakeImage();
+
+            String name = "yovin poorun";
+            System.out.println("Passing data from the license fragment -> " + name);
+            this.sendDataBackToParent(name);
+        });
+        this.confirmButton.setOnClickListener(view -> {
+            String name = "yovin poorun";
+            System.out.println("Passing data from the license fragment -> " + name);
+            this.sendDataBackToParent(name);
         });
 
-        return fragmentImageBinding.getRoot();
+        return fragmentLicenseBinding.getRoot();
+    }
+
+    private void retakeImage(){
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        try {
+            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                imageCaptureIntent.launch(intent);
+            }
+        } catch (ActivityNotFoundException e) {
+            System.out.println("Image Capture Error: " + e.getLocalizedMessage());
+            Toast.makeText(getContext(), "Could not open camera. Please enable and try again", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void replaceFragment(Bitmap imageBitmap){
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.FL_createActivityFragmentContainer, LicenseFragment.newInstance(imageBitmap, licenseNumber))
+                .setReorderingAllowed(true)
+                .commit();
+    }
+
+    private void sendDataBackToParent(String data){
+        String[] names = data.split(" ");
+        StringBuilder finalName = new StringBuilder();
+        for (String name : names) {
+            finalName.append(name.substring(0, 1).toUpperCase()).append(name.substring(1)).append(" ");
+        }
+        this.activityDataPasser.passData("Final Full Name -> " + finalName);
     }
 
     private void uploadImageToS3() {
@@ -171,13 +249,11 @@ public class ImageFragment extends Fragment {
         this.extractedDataLayout.setVisibility(VISIBLE);
 
         new Handler().postDelayed(() -> {
-            Objects.requireNonNull(this.driverName.getEditText()).setText("Daniel Githiomi");
+            Objects.requireNonNull(this.driverName.getEditText()).setText("daniel githiomi");
             Objects.requireNonNull(this.driverLicenseNumber.getEditText()).setText(licenseNumber);
             Objects.requireNonNull(this.driverDob.getEditText()).setText("27.08.2001");
 
-            if (getEditTextData(this.driverName) != null && getEditTextData(this.driverLicenseNumber) != null && getEditTextData(this.driverDob) != null)
-                this.confirmButton.setEnabled(true);
-
+            this.confirmButton.setEnabled(true);
         }, 1000);
     }
 
@@ -196,7 +272,7 @@ public class ImageFragment extends Fragment {
         return Objects.requireNonNull(textInputLayout.getEditText()).getText().toString();
     }
 
-    private void inflateViews(FragmentImageBinding root) {
+    private void inflateViews(FragmentLicenseBinding root) {
         this.imagePreview = root.IVScanPreview;
         this.loadingLayout = root.LLLoadingLayout;
         this.retakeButton = root.BTNRetakeButton;
