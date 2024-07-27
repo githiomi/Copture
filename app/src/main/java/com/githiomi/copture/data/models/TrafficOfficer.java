@@ -11,10 +11,22 @@ public class TrafficOfficer {
     private String officerNames;
     private OfficerRole officerRole;
     private PoliceStation officerStation;
-    private TrafficOfficer officerSupervisor;
+    private String officerSupervisorId;
     private Sex sex;
     private String officerDob;
     private String password;
+
+    public TrafficOfficer(String officerBadgeNumber, String officerSurname, String officerNames, OfficerRole officerRole, PoliceStation officerStation, String officerSupervisor, Sex sex, String officerDob, String password) {
+        this.officerBadgeNumber = officerBadgeNumber;
+        this.officerSurname = officerSurname;
+        this.officerNames = officerNames;
+        this.officerRole = officerRole;
+        this.officerStation = officerStation;
+        this.officerSupervisorId = officerSupervisorId;
+        this.sex = sex;
+        this.officerDob = officerDob;
+        this.password = password;
+    }
 
     public String getOfficerBadgeNumber() {
         return officerBadgeNumber;
@@ -56,12 +68,12 @@ public class TrafficOfficer {
         this.officerStation = officerStation;
     }
 
-    public TrafficOfficer getOfficerSupervisor() {
-        return officerSupervisor;
+    public String getOfficerSupervisorId() {
+        return officerSupervisorId;
     }
 
-    public void setOfficerSupervisor(TrafficOfficer officerSupervisor) {
-        this.officerSupervisor = officerSupervisor;
+    public void setOfficerSupervisor(String officerSupervisor) {
+        this.officerSupervisorId = officerSupervisor;
     }
 
     public Sex getSex() {

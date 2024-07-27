@@ -22,6 +22,7 @@ import com.githiomi.copture.data.interfaces.ApiService;
 import com.githiomi.copture.data.models.Offence;
 import com.githiomi.copture.databinding.ActivityMainBinding;
 import com.githiomi.copture.utils.Animations;
+import com.githiomi.copture.utils.Constants;
 import com.githiomi.copture.views.fragments.HistoryFragment;
 import com.githiomi.copture.views.fragments.HomeFragment;
 import com.githiomi.copture.views.fragments.HotlineFragment;
@@ -84,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
         apiService = retrofit.create(ApiService.class);
         getDynamoDBData();
+
+        // Get data
+        System.out.println("Logged in user -> " + getSharedPreferences(Constants.AUTH_SHARED_PREFERENCES, MODE_PRIVATE).getString(Constants.LOGGED_IN_USER, ""));
 
         // Attach views
         getSupportFragmentManager()

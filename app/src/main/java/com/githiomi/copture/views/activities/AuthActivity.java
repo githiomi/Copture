@@ -1,8 +1,8 @@
 package com.githiomi.copture.views.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -14,14 +14,17 @@ import androidx.core.view.WindowInsetsCompat;
 import com.githiomi.copture.R;
 import com.githiomi.copture.databinding.ActivityAuthBinding;
 import com.githiomi.copture.utils.Animations;
+import com.githiomi.copture.utils.Constants;
 import com.githiomi.copture.views.fragments.LoginFragment;
-import com.githiomi.copture.views.fragments.RegisterFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AuthActivity extends AppCompatActivity {
 
     Animations animations;
     FrameLayout authenticationFragmentContainer;
+
+    // Shared preferences
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor sharedPreferencesEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,10 @@ public class AuthActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Init shared preferences
+        this.sharedPreferences = getSharedPreferences(Constants.AUTH_SHARED_PREFERENCES, MODE_PRIVATE);
+        this.sharedPreferencesEditor = this.sharedPreferences.edit();
 
         // Animations
         this.animations = new Animations(this);
@@ -57,7 +64,20 @@ public class AuthActivity extends AppCompatActivity {
         this.authenticationFragmentContainer.setAnimation(this.animations.getFromBottomAnimation());
     }
 
-    private void bindViews(ActivityAuthBinding root){
+    private void bindViews(ActivityAuthBinding root) {
         this.authenticationFragmentContainer = root.FLAuthenticationFragmentContainer;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        String loggedInUserBadge = this.sharedPreferences.getString(Constants.LOGGED_IN_USER, "");
+
+        if (!loggedInUserBadge.isEmpty()) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+    }
+
 }
