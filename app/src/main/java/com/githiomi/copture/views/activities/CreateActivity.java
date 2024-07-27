@@ -51,23 +51,6 @@ public class CreateActivity extends AppCompatActivity implements ActivityDataPas
         // Inflate views
         inflateViews(activityCreateBinding);
 
-        TransferNetworkLossHandler.getInstance(getApplicationContext());
-
-        // Init AWS Mobile Client
-        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
-            @Override
-            public void onResult(UserStateDetails userStateDetails) {
-                System.out.println("AWS Mobile Client created successfully");
-                Log.i("INIT", "onResult: " + userStateDetails.getUserState());
-            }
-
-            @Override
-            public void onError(Exception e) {
-                System.out.println("Error creating AWS Mobile Client");
-                Log.e("INIT", "Initialization error.", e);
-            }
-        });
-
         // Set default fragment
         replaceFragmentContainer(new TicketFragment());
     }
@@ -76,8 +59,7 @@ public class CreateActivity extends AppCompatActivity implements ActivityDataPas
     @Override
     public void passData(String data) {
         // Handle data passed from fragments
-        System.out.println("FROM ACTIVITY: Original Data -> " + data );
-        System.out.println("FROM ACTIVITY: The data passed is -> " + data.toUpperCase() );
+        System.out.println("Data received -> " + data);
     }
 
     private void replaceFragmentContainer(Fragment fragment) {

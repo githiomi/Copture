@@ -56,6 +56,7 @@ public class LicenseFragment extends Fragment {
     TextInputLayout driverName, driverLicenseNumber, driverDob;
     AppCompatButton confirmButton;
 
+
     // Data
     Animations animations;
     private Bitmap imageBitmap;
@@ -135,14 +136,9 @@ public class LicenseFragment extends Fragment {
 
             // redo the image capture and upload process
             retakeImage();
-
-            String name = "yovin poorun";
-            System.out.println("Passing data from the license fragment -> " + name);
-            this.sendDataBackToParent(name);
         });
         this.confirmButton.setOnClickListener(view -> {
-            String name = "yovin poorun";
-            System.out.println("Passing data from the license fragment -> " + name);
+            String name = "yovin poorun ";
             this.sendDataBackToParent(name);
         });
 

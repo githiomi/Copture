@@ -4,6 +4,7 @@ import static com.githiomi.copture.R.id.FL_mainActivityFragmentContainer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.UserStateDetails;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferNetworkLossHandler;
 import com.githiomi.copture.R;
 import com.githiomi.copture.data.interfaces.ApiService;
 import com.githiomi.copture.data.models.Offence;
@@ -68,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
         // Set animations
         attachAnimations();
 
+        // Init AWS Resources
+        initAWSResources();
+
         // Get data from AWS DynamoDB
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://5pxwfv65c6.execute-api.us-east-1.amazonaws.com/production/")
@@ -102,6 +110,30 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private void initAWSResources(){
+
+        TransferNetworkLossHandler.getInstance(getApplicationContext());
+
+        // Init AWS Mobile Client
+        AWSMobileClient.getInstance().initialize(getApplicationContext(), new com.amazonaws.mobile.client.Callback<UserStateDetails>() {
+            @Override
+            public void onResult(UserStateDetails userStateDetails) {
+                System.out.println("AWS Mobile Client created successfully");
+                Log.i("INIT", "onResult: " + userStateDetails.getUserState());
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println("Error creating AWS Mobile Client");
+                Log.e("INIT", "Initialization error.", e);
+            }
+        });
+
+        // Init DynamoDB Client
+
+
     }
 
     private void getDynamoDBData(){
