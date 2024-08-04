@@ -18,7 +18,8 @@ public class Driver {
     private BloodGroup bloodGroup;
     private String driverLicenseExpirationDate;
 
-    public Driver(String driverLicenseNumber, String driverSurname, String driverNames, String driverDob, Nationality driverNationality, Sex sex, BloodGroup bloodGroup, String driverLicenseExpirationDate) {
+    public Driver(String driverLicenseNumber, String driverSurname, String driverNames, String driverDob,
+                  Nationality driverNationality, Sex sex, BloodGroup bloodGroup, String driverLicenseExpirationDate) {
         this.driverLicenseNumber = driverLicenseNumber;
         this.driverSurname = driverSurname;
         this.driverNames = driverNames;

@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".views.fragments.HistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_History"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/transparent"
+        android:padding="15dp"
+        tools:itemCount="5"
+        tools:listitem="@layout/history_recycler_view_item" />
 
 </FrameLayout>

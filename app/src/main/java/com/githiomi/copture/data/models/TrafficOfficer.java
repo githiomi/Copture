@@ -16,7 +16,8 @@ public class TrafficOfficer {
     private String officerDob;
     private String password;
 
-    public TrafficOfficer(String officerBadgeNumber, String officerSurname, String officerNames, OfficerRole officerRole, PoliceStation officerStation, String officerSupervisor, Sex sex, String officerDob, String password) {
+    public TrafficOfficer(String officerBadgeNumber, String officerSurname, String officerNames, OfficerRole officerRole,
+                          PoliceStation officerStation, String officerSupervisorId, Sex sex, String officerDob, String password) {
         this.officerBadgeNumber = officerBadgeNumber;
         this.officerSurname = officerSurname;
         this.officerNames = officerNames;
